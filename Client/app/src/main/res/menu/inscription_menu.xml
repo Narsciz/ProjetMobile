@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_inscription"
+        android:title="@string/inscrption"
+        android:showAsAction="ifRoom"
+        />
+</menu>

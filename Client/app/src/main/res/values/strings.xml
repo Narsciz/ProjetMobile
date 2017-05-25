@@ -15,6 +15,11 @@
     <string name="ajouter_qcm">Ajouter QCM</string>
     <string name="title_activity_qcm">QcmActivity</string>
     <string name="home">Home</string>
+    <string name="confirmer_mdp">Confirmer mot de passe</string>
+    <string name="prenom">Prenom</string>
+    <string name="nom">Nom</string>
+    <string name="valider">Valider</string>
+    <string name="inscrption">Inscription</string>
 
 
 </resources>

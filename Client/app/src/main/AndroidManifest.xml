@@ -2,12 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="progmobile.coursenligne">
 
-    <uses-permission android:name="android.permission.INTERNET" >
-        </uses-permission>
-    <uses-permission android:name="android.permission.WAKE_LOCK" >
-        </uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +25,9 @@
         <activity android:name=".QcmActivity" />
         <activity android:name=".CreateQcmActivity" />
         <activity android:name=".CreateCoursActivity" />
-        <activity android:name=".StreamingActivity"></activity>
+        <activity android:name=".StreamingActivity" />
+        <activity android:name=".InscriptionActivity" />
+        <activity android:name=".InscriptionMatiereActivity"></activity>
     </application>
 
 </manifest>
