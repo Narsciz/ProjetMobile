@@ -3,7 +3,7 @@ package progmobile.coursenligne;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CreateQcmActivity extends AppCompatActivity {
+public class CreateQcmActivity extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

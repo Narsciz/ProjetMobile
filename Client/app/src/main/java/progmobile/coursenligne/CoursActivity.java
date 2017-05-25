@@ -1,6 +1,9 @@
 package progmobile.coursenligne;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,10 +14,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
+import java.io.File;
 import java.util.Vector;
 
-public class CoursActivity extends AppCompatActivity {
+import progmobile.coursenligne.CommonClasses.Cours;
+
+public class CoursActivity extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +41,9 @@ public class CoursActivity extends AppCompatActivity {
 
             boutons.get(i).setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
-                    startActivity(new Intent(CoursActivity.this,StreamingActivity.class));
+
+                    //startActivity(new Intent(CoursActivity.this,StreamingActivity.class));
+                    startActivity(new Intent(CoursActivity.this,PdfActivity.class));
                 }
             });
 

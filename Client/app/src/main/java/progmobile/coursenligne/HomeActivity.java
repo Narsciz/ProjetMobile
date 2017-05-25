@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.Vector;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

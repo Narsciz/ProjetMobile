@@ -9,10 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import progmobile.coursenligne.CommonClasses.Annee;
 import progmobile.coursenligne.CommonClasses.Utilisateur;
 
 
-public class AuthentificationActivity extends AppCompatActivity {
+public class AuthentificationActivity extends AbstractActivity {
 
 
 
@@ -27,10 +28,12 @@ public class AuthentificationActivity extends AppCompatActivity {
         //on récup email et mdp
         EditText emailEditText=(EditText)findViewById(R.id.edit_email);
         EditText mdpEditText=(EditText)findViewById(R.id.edit_mdp);
-        String nom=emailEditText.getText().toString();
-        String prenom=mdpEditText.getText().toString();
+        String email=emailEditText.getText().toString();
+        String mdp=mdpEditText.getText().toString();
 
         if (/*vérif bdd*/true){
+            /*récup bdd info utilisateur*/
+            setSession(new Utilisateur(/*infos*/new String("nom"),Annee.L1));
             Intent intent=new Intent(this,HomeActivity.class);
             startActivity(intent);
         }

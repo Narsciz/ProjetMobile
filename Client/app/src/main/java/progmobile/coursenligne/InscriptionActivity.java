@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 
-public class InscriptionActivity extends AppCompatActivity {
+public class InscriptionActivity extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

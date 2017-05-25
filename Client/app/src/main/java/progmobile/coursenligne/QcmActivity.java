@@ -14,7 +14,7 @@ import android.widget.ScrollView;
 
 import java.util.Vector;
 
-public class QcmActivity extends AppCompatActivity {
+public class QcmActivity extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

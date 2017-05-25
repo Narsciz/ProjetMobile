@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MatiereActivity extends AppCompatActivity {
+public class MatiereActivity extends AbstractActivity {
 
 
     @Override
