@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CoursEnLigne</string>
+    <string name="label_email">Email</string>
+    <string name="label_mdp">Mot de passe</string>
+    <string name="se_connecter">Se connecter</string>
+    <string name="connexion">Connexion</string>
+    <string name="deconnexion">déconnexion</string>
+    <string name="erreur_email">Email invalide</string>
+    <string name="erreur_mdp">Mot de passe trop court</string>
+    <string name="erreur_mdp_incorrect">Mot de passe incorrect</string>
+    <string name="erreur_champs_obligatoire">Ce champs est obligatoire</string>
+    <string name="consulter_cours">Cours</string>
+    <string name="consulter_qcm">QCM</string>
+    <string name="ajouter_cours">Ajouter cours</string>
+    <string name="ajouter_qcm">Ajouter QCM</string>
+    <string name="title_activity_qcm">QcmActivity</string>
+    <string name="home">Home</string>
+
+
+</resources>
