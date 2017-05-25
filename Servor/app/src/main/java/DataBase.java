@@ -7,13 +7,17 @@ public class DataBase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "CoursEnLigne.db";
     private static final int DATABASE_VERSION = 1;
 
+    public static final String TABLE_ANNEE = "Annee";
+        public static final String COLUMN_ANNEE_ID = "_id";
+        public static final String COLUMN_ANNEE_NOM = "Nom";
+
     public static final String TABLE_UTILISATEUR = "Utilisateur";
         public static final String COLUMN_UTILISATEUR_IDMAIL = "_idmail";
         public static final String COLUMN_UTILISATEUR_NOM = "Nom";
         public static final String COLUMN_UTILISATEUR_PRENOM = "Prenom";
         public static final String COLUMN_UTILISATEUR_TYPE = "Type";
         public static final String COLUMN_UTILISATEUR_MDP = "MotDePasse";
-        public static final String COLUMN_UTILISATEUR_ANNEE = "Annee";
+        public static final String COLUMN_UTILISATEUR_ANNEE_ID = "Annee";
 
     public static final String TABLE_COURS = "Cours";
         public static final String COLUMN_COURS_ID = "_id";
@@ -37,6 +41,8 @@ public class DataBase extends SQLiteOpenHelper {
 
     public static final String TABLE_QCM = "QCM";
         public static final String COLUMN_QCM_ID = "_id";
+        public static final String COLUMN_QCM_MATIERE_ID = "Matiere_id";
+        public static final String COLUMN_QCM_INTITULE_ID = "Intitule_id";
         public static final String COLUMN_QCM_UTILISATEUR_ID = "Utilisateur_id";
         public static final String COLUMN_QCM_NOM = "Nom";
 
@@ -52,8 +58,19 @@ public class DataBase extends SQLiteOpenHelper {
         public static final String COLUMN_REPONSE_TEXTE = "Texte";
         public static final String COLUMN_REPONSE_VRAI = "Vrai";
 
+    public static final String TABLE_QCMCANDIDAT = "EleveCandidatQCM";
+        public static final String COLUMN_QCMCANDIDAT_ID = "_id";
+        public static final String COLUMN_QCMCANDIDAT_QCM_ID = "QCM_id";
+        public static final String COLUMN_QCMCANDIDAT_UTILISATEUR_ID = "Question_id";
+
 
     // Commande sql pour la création de la base de données
+    private static final String DATABASE_CREATE_ANNEE = "create table "
+            + TABLE_ANNEE + "("
+            + COLUMN_ANNEE_ID + "integer primary key autoincrement, "
+            + COLUMN_ANNEE_NOM + " text not null"
+            + ");";
+
     private static final String DATABASE_CREATE_UTILISATEUR = "create table "
             + TABLE_UTILISATEUR + "("
             + COLUMN_UTILISATEUR_IDMAIL + " varchar(50) primary key, "
@@ -61,7 +78,9 @@ public class DataBase extends SQLiteOpenHelper {
             + COLUMN_UTILISATEUR_PRENOM + " text not null, "
             + COLUMN_UTILISATEUR_TYPE + " text not null, "
             + COLUMN_UTILISATEUR_MDP + " text not null, "
-            + COLUMN_UTILISATEUR_ANNEE + " text not null);";
+            + COLUMN_UTILISATEUR_ANNEE_ID + " integer"
+            + "constraint fk_Annee_id foreign key("+ COLUMN_UTILISATEUR_ANNEE_ID + ") references " + TABLE_ANNEE + "(" + COLUMN_ANNEE_ID + ")"
+            + ");";
 
     private static final String DATABASE_CREATE_COURS = "create table "
             + TABLE_COURS + "("
@@ -91,8 +110,12 @@ public class DataBase extends SQLiteOpenHelper {
     private static final String DATABASE_CREATE_QCM = "create table "
             + TABLE_QCM + "("
             + COLUMN_QCM_ID + " integer primary key autoincrement, "
+            + COLUMN_QCM_MATIERE_ID + "integer, "
+            + COLUMN_QCM_INTITULE_ID + "integer, "
             + COLUMN_QCM_UTILISATEUR_ID + "integer, "
             + COLUMN_QCM_NOM + " text not null"
+            + "constraint fk_Matiere_id foreign key("+ COLUMN_QCM_MATIERE_ID + ") references " + TABLE_MATIERE + "(" + COLUMN_MATIERE_ID + "), "
+            + "constraint fk_INTITULE_id foreign key("+ COLUMN_QCM_INTITULE_ID + ") references " + TABLE_INTITULE + "(" + COLUMN_INTITULE_ID + "), "
             + "constraint fk_Utilisateur_id foreign key("+ COLUMN_QCM_UTILISATEUR_ID + ") references " + TABLE_UTILISATEUR + "(" + COLUMN_UTILISATEUR_IDMAIL + ")"
             +");";
 
@@ -115,6 +138,15 @@ public class DataBase extends SQLiteOpenHelper {
             + "constraint fk_Question_id foreign key("+ COLUMN_REPONSE_QUESTION_ID + ") references " + TABLE_QUESTION + "(" + COLUMN_QUESTION_ID + ")"
             + ");";
 
+    private static final String DATABASE_CREATE_QCMCANDIDAT = "create table "
+            + TABLE_QCMCANDIDAT + "("
+            + COLUMN_QCMCANDIDAT_ID + " integer primary key autoincrement, "
+            + COLUMN_QCMCANDIDAT_QCM_ID + "integer, "
+            + COLUMN_QCMCANDIDAT_UTILISATEUR_ID + "integer, "
+            + "constraint fk_QCM_id foreign key("+ COLUMN_QCMCANDIDAT_QCM_ID + ") references " + TABLE_QCM + "(" + COLUMN_QCM_ID + "), "
+            + "constraint fk_Utilisateur_id foreign key("+ COLUMN_QCMCANDIDAT_UTILISATEUR_ID + ") references " + TABLE_UTILISATEUR + "(" + COLUMN_UTILISATEUR_IDMAIL + ")"
+            + ");";
+
     public DataBase(Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -122,6 +154,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(DATABASE_CREATE_ANNEE);
         db.execSQL(DATABASE_CREATE_UTILISATEUR);
         db.execSQL(DATABASE_CREATE_COURS);
         db.execSQL(DATABASE_CREATE_MATIERE);
@@ -129,6 +162,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL(DATABASE_CREATE_QCM);
         db.execSQL(DATABASE_CREATE_QUESTION);
         db.execSQL(DATABASE_CREATE_REPONSE);
+        db.execSQL(DATABASE_CREATE_QCMCANDIDAT);
     }
 
     @Override
