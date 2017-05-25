@@ -46,11 +46,11 @@ public class DataBase extends SQLiteOpenHelper {
         public static final String COLUMN_QUESTION_TEXTE = "Texte";
 
     public static final String TABLE_REPONSE = "Réponse";
-    public static final String COLUMN_REPONSE_ID = "_id";
-    public static final String COLUMN_REPONSE_QCM_ID = "QCM_id";
-    public static final String COLUMN_REPONSE_QUESTION_ID = "Question_id";
-    public static final String COLUMN_REPONSE_TEXTE = "Texte";
-    public static final String COLUMN_REPONSE_VRAI = "Vrai";
+        public static final String COLUMN_REPONSE_ID = "_id";
+        public static final String COLUMN_REPONSE_QCM_ID = "QCM_id";
+        public static final String COLUMN_REPONSE_QUESTION_ID = "Question_id";
+        public static final String COLUMN_REPONSE_TEXTE = "Texte";
+        public static final String COLUMN_REPONSE_VRAI = "Vrai";
 
 
     // Commande sql pour la création de la base de données
@@ -100,7 +100,7 @@ public class DataBase extends SQLiteOpenHelper {
             + TABLE_QUESTION + "("
             + COLUMN_QUESTION_ID + " integer primary key autoincrement, "
             + COLUMN_QUESTION_QCM_ID + "integer, "
-            + COLUMN_QCM_NOM + " text not null, "
+            + COLUMN_QUESTION_TEXTE + " text not null, "
             +"constraint fk_QCM_id foreign key("+ COLUMN_QUESTION_QCM_ID + ") references " + TABLE_QCM + "(" + COLUMN_QCM_ID + ")"
             + ");";
 
