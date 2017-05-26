@@ -1,4 +1,4 @@
-package progmobile.coursenligne.CommonClasses;
+package CommonClasses;
 
 
 public enum Matiere {

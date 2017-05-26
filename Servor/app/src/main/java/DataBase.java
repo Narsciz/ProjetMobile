@@ -63,6 +63,10 @@ public class DataBase extends SQLiteOpenHelper {
         public static final String COLUMN_QCMCANDIDAT_QCM_ID = "QCM_id";
         public static final String COLUMN_QCMCANDIDAT_UTILISATEUR_ID = "Question_id";
 
+    public static final String TABLE_ANNEEAUTHORISEE = "AnneeAuthorisee";
+        public static final String COLUMN_ANNEEAUTHORISEE_ID = "_id";
+        public static final String COLUMN_ANNEEAUTHORISEE_COURS_ID = "Cours_id";
+        public static final String COLUMN_ANNEEAUTHORISEE_ANNEE_ID = "Annee_id";
 
     // Commande sql pour la création de la base de données
     private static final String DATABASE_CREATE_ANNEE = "create table "
@@ -147,6 +151,15 @@ public class DataBase extends SQLiteOpenHelper {
             + "constraint fk_Utilisateur_id foreign key("+ COLUMN_QCMCANDIDAT_UTILISATEUR_ID + ") references " + TABLE_UTILISATEUR + "(" + COLUMN_UTILISATEUR_IDMAIL + ")"
             + ");";
 
+    private static final String DATABASE_CREATE_ANNEEAUTHORISEE = "create table "
+            + TABLE_ANNEEAUTHORISEE + "("
+            + COLUMN_ANNEEAUTHORISEE_ID + " integer primary key autoincrement, "
+            + COLUMN_ANNEEAUTHORISEE_COURS_ID + "integer, "
+            + COLUMN_ANNEEAUTHORISEE_ANNEE_ID + "integer, "
+            + "constraint fk_Cours_id foreign key("+ COLUMN_ANNEEAUTHORISEE_COURS_ID + ") references " + TABLE_COURS + "(" + COLUMN_COURS_ID + "), "
+            + "constraint fk_Utilisateur_id foreign key("+ COLUMN_ANNEEAUTHORISEE_ANNEE_ID + ") references " + TABLE_ANNEE + "(" + COLUMN_ANNEE_ID + ")"
+            + ");";
+
     public DataBase(Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -163,6 +176,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL(DATABASE_CREATE_QUESTION);
         db.execSQL(DATABASE_CREATE_REPONSE);
         db.execSQL(DATABASE_CREATE_QCMCANDIDAT);
+        db.execSQL(DATABASE_CREATE_ANNEEAUTHORISEE);
     }
 
     @Override

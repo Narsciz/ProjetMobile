@@ -1,4 +1,4 @@
-package progmobile.coursenligne.CommonClasses;
+package CommonClasses;
 
 import java.util.HashMap;
 import java.util.Vector;
