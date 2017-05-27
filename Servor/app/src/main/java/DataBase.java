@@ -82,7 +82,7 @@ public class DataBase extends SQLiteOpenHelper {
             + COLUMN_UTILISATEUR_PRENOM + " text not null, "
             + COLUMN_UTILISATEUR_TYPE + " text not null, "
             + COLUMN_UTILISATEUR_MDP + " text not null, "
-            + COLUMN_UTILISATEUR_ANNEE_ID + " integer"
+            + COLUMN_UTILISATEUR_ANNEE_ID + " integer,"
             + "constraint fk_Annee_id foreign key("+ COLUMN_UTILISATEUR_ANNEE_ID + ") references " + TABLE_ANNEE + "(" + COLUMN_ANNEE_ID + ")"
             + ");";
 
