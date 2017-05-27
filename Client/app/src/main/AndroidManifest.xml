@@ -14,11 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AuthentificationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".CoursActivity" />
@@ -30,7 +26,14 @@
         <activity android:name=".InscriptionActivity" />
         <activity android:name=".InscriptionMatiereActivity" />
         <activity android:name=".AbstractActivity" />
-        <activity android:name=".PdfActivity"></activity>
+        <activity android:name=".PdfActivity" />
+        <activity android:name=".TestCommunicationServer">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

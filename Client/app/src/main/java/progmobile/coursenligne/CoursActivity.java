@@ -19,7 +19,6 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.Vector;
 
-import progmobile.coursenligne.CommonClasses.Cours;
 
 public class CoursActivity extends AbstractActivity {
 

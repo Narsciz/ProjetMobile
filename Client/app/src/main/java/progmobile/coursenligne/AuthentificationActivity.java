@@ -2,15 +2,14 @@ package progmobile.coursenligne;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import progmobile.coursenligne.CommonClasses.Annee;
-import progmobile.coursenligne.CommonClasses.Utilisateur;
+import CommonClasses.Annee;
+import CommonClasses.Utilisateur;
 
 
 public class AuthentificationActivity extends AbstractActivity {
@@ -33,7 +32,7 @@ public class AuthentificationActivity extends AbstractActivity {
 
         if (/*vérif bdd*/true){
             /*récup bdd info utilisateur*/
-            setSession(new Utilisateur(/*infos*/new String("nom"),Annee.L1));
+            setSession(new Utilisateur(/*infos*/new String("nom"), Annee.L1));
             Intent intent=new Intent(this,HomeActivity.class);
             startActivity(intent);
         }

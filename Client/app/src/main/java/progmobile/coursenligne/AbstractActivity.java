@@ -3,15 +3,15 @@ package progmobile.coursenligne;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import progmobile.coursenligne.CommonClasses.Utilisateur;
+import CommonClasses.Utilisateur;
 
 public class AbstractActivity extends AppCompatActivity {
 
 
     Utilisateur session;
+    Client client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,4 +36,5 @@ public class AbstractActivity extends AppCompatActivity {
     public Utilisateur getSession(){
         return session;
     }
+
 }
