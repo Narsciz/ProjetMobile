@@ -1,24 +1,23 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-public class MatiereActivity extends AbstractActivity {
+public class ChoixActivity extends AbstractActivity {
 
+
+    String intitule="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_matiere);
+        setContentView(R.layout.activity_choix);
+        Bundle b=getIntent().getExtras();
+        intitule=b.getString("intitule");
     }
 
 
@@ -58,10 +57,12 @@ public class MatiereActivity extends AbstractActivity {
     }
 
     public void consulterCours(View view){
-        startActivity(new Intent(this,CoursActivity.class));
+        String request="intituleCours;"+intitule+";cours";
+        new AskServerTask(this,request).execute();
     }
 
     public void consulterQcm(View view){
-        startActivity(new Intent(this,QcmActivity.class));
+        String request="intituleQcm;"+intitule+";qcm";
+        new AskServerTask(this,request).execute();
     }
 }

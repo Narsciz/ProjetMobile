@@ -6,40 +6,40 @@ package progmobile.coursenligne;
 import java.net.*;
 import java.io.*;
 
-public class Client implements Runnable
+public class AskServer
 {
 
     String serverIP="192.168.1.15";
-    String request;
-    String response="trop tot";
 
-    String getResponse(){
-        return response;
-    }
-    Client(String r){
-        request=r;
+    int port=1111;
+
+
+    AskServer(){
+
     }
 
-    @Override
-    public void run() {
+
+    public String ask(String request) {
         Socket s = null;
+        String response="";
 
         // Create the socket connection to the MultiThreadedSocketServer port 11111
-        try
-        {
-            s = new Socket(serverIP, 11111);
+        try {
+            s = new Socket(serverIP, port);
         }
-        catch(UnknownHostException uhe)
-        {
+        catch(UnknownHostException uhe) {
             // Server Host unreachable
             System.out.println("Unknown Host :" + serverIP);
             s = null;
+            return "Unknown Host :" + serverIP;
+
         }
-        catch(IOException ioe)
-        {
+        catch(IOException ioe) {
             // Cannot connect to port on given server host
-            System.out.println("Cant connect to server at 11111. Make sure it is running.");
+            System.out.println("Cant connect to server at "+port+". Make sure it is running.");
             s = null;
+            return "Cant connect to server at "+port+". Make sure it is running.";
+
         }
 
         if(s == null)
@@ -48,13 +48,12 @@ public class Client implements Runnable
         BufferedReader in = null;
         PrintWriter out = null;
 
-        try
-        {
+        try {
             // Create the streams to send and receive information
             in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             out = new PrintWriter(new OutputStreamWriter(s.getOutputStream()));
 
-            // Since this is the client, we will initiate the talking.
+            // Since this is the askServer, we will initiate the talking.
             // Send a string data and flush
             out.println(request);
             out.flush();
@@ -66,12 +65,11 @@ public class Client implements Runnable
             out.println("Quit");
             out.flush();
         }
-        catch(IOException ioe)
-        {
+        catch(IOException ioe) {
             System.out.println("Exception during communication. Server probably closed connection.");
+            return "Exception during communication. Server probably closed connection.";
         }
-        finally
-        {
+        finally {
             try
             {
                 // Close the input and output streams
@@ -85,5 +83,6 @@ public class Client implements Runnable
                 e.printStackTrace();
             }
         }
+        return response;
     }
 }

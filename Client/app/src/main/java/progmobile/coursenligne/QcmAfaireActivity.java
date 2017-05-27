@@ -1,6 +1,7 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +14,7 @@ import android.widget.ScrollView;
 
 import java.util.Vector;
 
-public class QcmActivity extends AbstractActivity {
+public class QcmAfaireActivity extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,8 @@ public class QcmActivity extends AbstractActivity {
 
             boutons.get(i).setOnClickListener(new OnClickListenerString(listeIdQcm[i]){
                 public void onClick(View v){
-                    String request="qcm;"+intitule;
-                    new AskServerTask(QcmActivity.this,request).execute();
+                    String request="qcmAfaire;"+intitule;
+                    new AskServerTask(QcmAfaireActivity.this,request).execute();
                 }
             });
 
@@ -46,12 +47,11 @@ public class QcmActivity extends AbstractActivity {
         scroll.addView(layout);
         setContentView(scroll);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
 
-        if (/*prof*/true)
-            inflater.inflate(R.menu.qcm_prof_menu,menu);
 
         inflater.inflate(R.menu.base_menu,menu);
         return true;
@@ -64,11 +64,8 @@ public class QcmActivity extends AbstractActivity {
             case R.id.item_home:
                 startActivity(new Intent(this,HomeActivity.class));
                 break;
-            case R.id.item_qcm:
-                startActivity(new Intent(this,CreateQcmActivity.class));
-                break;
             case R.id.item_deconnexion:
-                startActivity(new Intent(this,AuthentificationActivity.class));
+                startActivity(new Intent(this,DoQcmActivity.class));
                 break;
             default:
                 return super.onOptionsItemSelected(item);

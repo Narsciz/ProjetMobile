@@ -1,6 +1,7 @@
 package CommonClasses;
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.Vector;
 
 
@@ -13,6 +14,7 @@ public class Question {
     public Question(String l,HashMap<String,Boolean> r){
         laQuestion=l;
         reponses=r;
+
     }
     public String getQuestion(){
         return laQuestion;

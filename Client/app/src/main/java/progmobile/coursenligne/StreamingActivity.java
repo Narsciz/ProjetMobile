@@ -15,7 +15,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 public class StreamingActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     public static final String API_KEY="AIzaSyAuuPqwHjlE4nbOz8EF1Gw95tFYj5HtaXc";
-    public static final String VIDEO_ID="QjICgmk31js";
+    public static String VIDEO_ID="QjICgmk31js";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +28,9 @@ public class StreamingActivity extends YouTubeBaseActivity implements YouTubePla
         //vidView.setVideoPath("http://www.dailymotion.com/video/x5j58uo_the-definitive-guide-to-sqlite_school");
 
         vidView.start();*/
+        Bundle b=getIntent().getExtras();
+        VIDEO_ID=b.getString("pathCours");
+        Toast.makeText(this,VIDEO_ID,Toast.LENGTH_SHORT).show();
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.video);
         youTubePlayerView.initialize(API_KEY, this);
     }

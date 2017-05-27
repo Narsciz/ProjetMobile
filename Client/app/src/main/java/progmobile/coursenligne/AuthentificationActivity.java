@@ -29,16 +29,10 @@ public class AuthentificationActivity extends AbstractActivity {
         EditText mdpEditText=(EditText)findViewById(R.id.edit_mdp);
         String email=emailEditText.getText().toString();
         String mdp=mdpEditText.getText().toString();
+        String request="authentification;"+email+";"+"mdp";
 
-        if (/*vérif bdd*/true){
-            /*récup bdd info utilisateur*/
-            setSession(new Utilisateur(/*infos*/new String("nom"), Annee.L1));
-            Intent intent=new Intent(this,HomeActivity.class);
-            startActivity(intent);
-        }
-        else {
-            //afficher une erreur
-        }
+        new AskServerTask(this,request).execute();
+
     }
 
 

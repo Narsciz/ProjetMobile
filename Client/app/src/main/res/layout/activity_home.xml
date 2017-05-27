@@ -25,104 +25,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
+                android:text="@string/math"
+                android:id="@+id/home_math"
+                android:onClick="consulterMath"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
+                android:text="@string/info"
+                android:id="@+id/home_info"
+                android:onClick="consulterInformatique"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
+                android:text="@string/bio"
+                android:id="@+id/bio"
+                android:onClick="consulterBio"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
+                android:text="@string/chimie"
+                android:id="@+id/home_chimie"
+                android:onClick="consulterChimie"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/home_physique"
+                android:text="@string/physique"
 
-                android:text="matière1"
+                android:onClick="consulterPhysique"/>
 
-                android:onClick="consulterMatiere"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="matière1"
-
-                android:onClick="consulterMatiere"/>
 
 
 

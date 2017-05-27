@@ -23,36 +23,36 @@
 
 
             <EditText
-
+                android:id="@+id/inscription_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/label_email"
                 android:inputType="textEmailAddress"
                 />
             <EditText
-
+                android:id="@+id/inscription_mdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/label_mdp"
                 android:inputType="textPassword"/>
             <EditText
-
+                android:id="@+id/inscription_mdp2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/confirmer_mdp"
                 android:inputType="textPassword"/>
             <EditText
-
+                android:id="@+id/inscription_prenom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/prenom"
-                android:inputType="textPassword"/>
+                android:inputType="textPersonName"/>
             <EditText
-
+                android:id="@+id/inscription_nom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/nom"
-                android:inputType="textPassword"/>
+                android:inputType="textPersonName"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -63,12 +63,20 @@
                 <CheckBox
                     android:id="@+id/inscription_checkbox"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:onClick="modifyCheckBox"/>
 
             </LinearLayout>
+            <Spinner
+                android:id="@+id/insciption_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </Spinner>
 
 
         </LinearLayout>
+
     </ScrollView>
 
     <Button

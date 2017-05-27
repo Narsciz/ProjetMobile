@@ -16,7 +16,7 @@ public class MultiThreadedSocketServer {
 
     ServerSocket myServerSocket;
     boolean ServerOn = true;
-
+    int port=1111;
 
     public static void main (String[] args) 
     { 
@@ -26,7 +26,30 @@ public class MultiThreadedSocketServer {
 
 	private String ProcessRequest(String request) {
 		String resultat="";
-		switch(request){
+		String[] r=request.split(";");
+		switch(r[0]){
+		case "authentification":
+			resultat="authentification;sacha;weill;true;l1";
+			break;
+		case "inscription":
+			resultat="inscription;true";
+			break;
+		case "matiere":
+			resultat="matiere;HMIN207;HMMA504;tototata";
+			break;
+		case "intituleCours":
+			resultat="intituleCours;coursVideo|video|vZrTUc5XeL8;coursPdf|pdf|http://www.carnegiemnh.org/uploadedFiles/CMNH_Site/Learn_with_Us/Downloads/Diplodocus.pdf";
+			break;
+		case "intituleQcm":
+			resultat="intituleQcm;Qcm1|idQcm1;Qcm2|idQcm2";
+			break;
+		case "qcm":
+			resultat="qcm;Qu'elle est la couleur du cheval blanc d'henry IV ?|blanc@false#noir@true#rose@false;"
+					+ "Combien font 2+2 ?|4@true#3+1@true#5-2@false";
+			break;
+		case "qcmAfaire":
+			resultat="qcmAfaire;Qcm à faire 1|idQcmAfaire1;Qcm à faire 2|idQcmAfaire2";
+			break;
 		default:
 			resultat="le serveur n'a pas pu traiter votre requete";
 		}
@@ -37,11 +60,11 @@ public class MultiThreadedSocketServer {
     { 
         try 
         { 
-            myServerSocket = new ServerSocket(11111); 
+            myServerSocket = new ServerSocket(port); 
         } 
         catch(IOException ioe) 
         { 
-            System.out.println("Could not create server socket on port 11111. Quitting."); 
+            System.out.println("Could not create server socket on port "+port+". Quitting."); 
             System.exit(-1); 
         } 
 

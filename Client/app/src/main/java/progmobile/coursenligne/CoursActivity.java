@@ -31,20 +31,38 @@ public class CoursActivity extends AbstractActivity {
         scroll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         Vector<Button> boutons=new Vector<>();
-        //récup liste cours utilisateur
+        Bundle b=this.getIntent().getExtras();
+        final String[] listeNomCours=b.getStringArray("listeNomCours");
+        final String[] listeTypeCours=b.getStringArray("listeTypeCours");
+        final String[] listePathCours=b.getStringArray("listePathCours");
 
 
-        for (int i=0;i<100;i++) {
+
+        for (int i=0;i<listeNomCours.length;i++) {
             boutons.add(new Button(this));
-            boutons.get(i).setText("cours"+i);
+            boutons.get(i).setText(listeNomCours[i]);
 
-            boutons.get(i).setOnClickListener(new View.OnClickListener(){
-                public void onClick(View v){
-
-                    //startActivity(new Intent(CoursActivity.this,StreamingActivity.class));
-                    startActivity(new Intent(CoursActivity.this,PdfActivity.class));
-                }
-            });
+            if (listeTypeCours[i].equals("pdf")){
+                boutons.get(i).setOnClickListener(new OnClickListenerString( listePathCours[i]) {
+                    public void onClick(View v) {
+                        Intent intent;
+                        intent = new Intent(CoursActivity.this, PdfActivity.class);
+                        intent.putExtra("pathCours",intitule);
+                        CoursActivity.this.startActivity(intent);
+                    }
+                });
+            }
+            else if (listeTypeCours[i].equals("video")){
+                boutons.get(i).setOnClickListener(new OnClickListenerString( listePathCours[i]) {
+                    public void onClick(View v) {
+                        Intent intent;
+                        intent = new Intent(CoursActivity.this, StreamingActivity.class);
+                        intent.putExtra("pathCours",intitule);
+                        CoursActivity.this.startActivity(intent);
+                    }
+                });
+            }
+            
 
             layout.addView(boutons.get(i));
         }

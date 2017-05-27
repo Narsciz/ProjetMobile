@@ -10,8 +10,8 @@ import CommonClasses.Utilisateur;
 public class AbstractActivity extends AppCompatActivity {
 
 
-    Utilisateur session;
-    Client client;
+    static Utilisateur session;
+    AskServer askServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +29,11 @@ public class AbstractActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setSession(Utilisateur utilisateur){
+    static public void setSession(Utilisateur utilisateur){
         session=utilisateur;
     }
 
-    public Utilisateur getSession(){
+    static public Utilisateur getSession(){
         return session;
     }
 
