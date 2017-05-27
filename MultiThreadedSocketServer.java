@@ -1,4 +1,4 @@
-package serveurTest2;
+package Server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +18,21 @@ public class MultiThreadedSocketServer {
     boolean ServerOn = true;
 
 
+    public static void main (String[] args) 
+    { 
+        new MultiThreadedSocketServer();        
+    } 
+
+
+	private String ProcessRequest(String request) {
+		String resultat="";
+		switch(request){
+		default:
+			resultat="le serveur n'a pas pu traiter votre requete";
+		}
+		return resultat;
+	} 
+	
     public MultiThreadedSocketServer() 
     { 
         try 
@@ -38,7 +53,7 @@ public class MultiThreadedSocketServer {
         System.out.println("It is now : " + formatter.format(now.getTime()));
 
         try {
-			System.out.println(InetAddress.getLocalHost());
+			System.out.println("Adresse ip du serveur : "+InetAddress.getLocalHost().getHostAddress());
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,11 +107,6 @@ public class MultiThreadedSocketServer {
 
     } 
 
-    public static void main (String[] args) 
-    { 
-        new MultiThreadedSocketServer();        
-    } 
-
 
     class ClientServiceThread extends Thread 
     { 
@@ -139,6 +149,7 @@ public class MultiThreadedSocketServer {
                     String clientCommand = in.readLine(); 
                     System.out.println("Client Says :" + clientCommand);
 
+                    
                     if(!ServerOn) 
                     { 
                         // Special command. Quit this thread 
@@ -148,23 +159,12 @@ public class MultiThreadedSocketServer {
                         m_bRunThread = false;   
 
                     } 
-                    
-                    if(clientCommand.equalsIgnoreCase("quit")) { 
-                        // Special command. Quit this thread 
-                        m_bRunThread = false;   
-                        System.out.print("Stopping client thread for client : "); 
-                    } else if(clientCommand.equalsIgnoreCase("end")) { 
-                        // Special command. Quit this thread and Stop the Server
-                        m_bRunThread = false;   
-                        System.out.print("Stopping client thread for client : "); 
-                        
-                        ServerOn = false;
-                    } else {
-                            // Process it 
-                            out.println("Server Says : " + clientCommand); 
-                            out.flush(); 
-                            
-                    }
+                    String response=ProcessRequest(clientCommand);
+                    out.println(response); 
+                    out.flush();
+                    m_bRunThread = false;   
+                    System.out.print("Stopping client thread for client : "); 
+
                 } 
             } 
             catch(Exception e) 
@@ -186,7 +186,8 @@ public class MultiThreadedSocketServer {
                     ioe.printStackTrace(); 
                 } 
             } 
-        } 
+        }
+
 
 
     } 

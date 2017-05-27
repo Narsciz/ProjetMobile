@@ -24,7 +24,7 @@ public class TestCommunicationServer extends AbstractActivity {
         task=new Task(this);
         task.execute(s);
     }
-    public void sendToAuthentification(){
+    public void sendToAuthentification(View view){
         startActivity(new Intent(this,AuthentificationActivity.class));
     }
 }
