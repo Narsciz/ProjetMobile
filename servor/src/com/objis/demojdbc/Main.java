@@ -7,7 +7,6 @@ import CommonClasses.*;
 public class Main {
 
 	public static void main(String[] args) throws SQLException {
-		DataBase db = new DataBase();
 		//Utilisateur utilisateur = new Utilisateur("test4", "Dupond3", "Gerard3", false, "motdepasse3", Annee.None);
 		//db.insertUtilisateur(utilisateur);
 		//db.deleteUtilisateur(utilisateur);
@@ -31,6 +30,7 @@ public class Main {
 		{
 			System.out.println(test.get(i) + "\n");
 		}*/
+			
 	}
 
 }

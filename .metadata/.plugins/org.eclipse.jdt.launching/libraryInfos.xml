@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse" version="1.8.0_131">
+<bootpath>
+<entry path="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse\lib\resources.jar"/>
+<entry path="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse\lib\rt.jar"/>
+<entry path="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse\lib\sunrsasign.jar"/>
+<entry path="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse\lib\jsse.jar"/>
+<entry path="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse\lib\jce.jar"/>
+<entry path="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse\lib\charsets.jar"/>
+<entry path="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse\lib\jfr.jar"/>
+<entry path="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse\lib\ext"/>
+<entry path="C:\Windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="B:\Program Files\Java\jdk1.8.0_131\jre\jreEclipse\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>

@@ -28,7 +28,7 @@ public class MultiThreadedSocketServer {
     } 
 
 
-	private String ProcessRequest(String request) {
+	public String ProcessRequest(String request) {
 		String resultat="";
 		String[] value = request.split(";");
 		
@@ -76,9 +76,70 @@ public class MultiThreadedSocketServer {
 										resultat += ";" + false;
 									break;
 		case "matiere":
-		case "intitulecours":
-		case "intituleqcm":
-		case "cours" :
+									Vector<String> intitules = new Vector<String>();
+									try{
+										 intitules = db.getIntituleFromMatiere(Matiere.valueOf(value[1]));
+										for(int i = 0; i<intitules.size(); i++)
+										{
+											Vector<String> attribute = new Vector<String>();
+											attribute.add("Intitule_id");
+											attribute.add("Annee");
+											Vector<String> attributeValue = new Vector<String>();
+											attributeValue.add(intitules.get(i));
+											attributeValue.add(value[2]);
+											Vector<Cours> cours = db.getCoursByAttributes(attribute, attributeValue);
+											if(cours.size() == 0)
+											{
+												intitules.remove(i);
+												i--;
+											}
+										}
+									}catch(Exception e)
+									{
+										
+									}
+									resultat = "matiere";
+									for(int i = 0; i<intitules.size(); i++)
+									{
+										resultat += ";" + intitules.get(i);
+									}
+									return resultat;
+		case "intitulecours":		
+									try{
+										Vector<Cours> cours = new Vector<Cours>();
+										Vector<String> attribute = new Vector<String>();
+										attribute.add("Intitule_id");
+										Vector<String> attributeValue = new Vector<String>();
+										attributeValue.add(value[1]);
+										cours = db.getCoursByAttributes(attribute, attributeValue);
+										resultat = "intitule";
+										for(int i = 0; i<cours.size(); i++)
+										{
+											resultat += ";" + cours.get(i).getNom() + "|" + cours.get(i).getFormat().name() + "|" + cours.get(i).getPath();
+										}
+										return resultat;
+									}catch(Exception e)
+									{
+										
+									}
+									
+		case "intituleqcm":			Vector<QCM> qcm = new Vector<QCM>();
+									try{
+									Vector<String> attribute = new Vector<String>();
+									attribute.add("Intitule_id");
+									Vector<String> attributeValue = new Vector<String>();
+									attributeValue.add(value[1]);
+									//cours = db.getQCMByAttributes(attribute, attributeValue);
+									resultat = "intitule";
+									for(int i = 0; i<qcm.size(); i++)
+									{
+										resultat += ";" + qcm.get(i).getNom() + "|" + qcm.get(i).getId();
+									}
+									return resultat;
+									}catch(Exception e)
+									{
+			
+									}
 		case "qcm" :
 		case "validerqcm" :
 		case "qcmafaire" :
