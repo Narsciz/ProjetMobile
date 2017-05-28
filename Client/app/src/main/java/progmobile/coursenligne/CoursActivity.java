@@ -62,7 +62,7 @@ public class CoursActivity extends AbstractActivity {
                     }
                 });
             }
-            
+
 
             layout.addView(boutons.get(i));
         }

@@ -8,9 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import CommonClasses.Annee;
-import CommonClasses.Utilisateur;
-
 
 public class AuthentificationActivity extends AbstractActivity {
 
@@ -28,8 +25,12 @@ public class AuthentificationActivity extends AbstractActivity {
         EditText emailEditText=(EditText)findViewById(R.id.edit_email);
         EditText mdpEditText=(EditText)findViewById(R.id.edit_mdp);
         String email=emailEditText.getText().toString();
+        if (email.isEmpty())
+            email=" ";
         String mdp=mdpEditText.getText().toString();
-        String request="authentification;"+email+";"+"mdp";
+        if (mdp.isEmpty())
+            mdp=" ";
+        String request="authentification;"+email+";"+mdp;
 
         new AskServerTask(this,request).execute();
 

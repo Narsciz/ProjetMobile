@@ -32,11 +32,12 @@ public class QcmActivity extends AbstractActivity {
         for (int i=0;i<listeNomQcm.length;i++) {
             boutons.add(new Button(this));
             boutons.get(i).setText(listeNomQcm[i]);
+            String request="qcm;"+listeIdQcm[i]+";"+listeNomQcm[i];
 
-            boutons.get(i).setOnClickListener(new OnClickListenerString(listeIdQcm[i]){
+            boutons.get(i).setOnClickListener(new OnClickListenerString(request){
                 public void onClick(View v){
-                    String request="qcm;"+intitule;
-                    new AskServerTask(QcmActivity.this,request).execute();
+                    //String request="qcm;"+intitule;
+                    new AskServerTask(QcmActivity.this,intitule).execute();
                 }
             });
 

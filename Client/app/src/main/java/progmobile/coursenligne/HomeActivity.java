@@ -57,7 +57,7 @@ public class HomeActivity extends AbstractActivity {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.base_menu,menu);
         //if (/*eleve*/ true && true /*qcm à faire != 0*/ )
-            inflater.inflate(R.menu.qcm_eleve_menu,menu);
+        inflater.inflate(R.menu.qcm_eleve_menu,menu);
 
         return true;
     }
@@ -73,7 +73,7 @@ public class HomeActivity extends AbstractActivity {
                 startActivity(new Intent(this,AuthentificationActivity.class));
                 break;
             case R.id.item_qcm_a_faire:
-                String request="qcmAfaire;"+AbstractActivity.getSession().getIdentifiant();
+                String request="qcmAfaire;"+AbstractActivity.getSession().getIdMail();
                 new AskServerTask(this,request).execute();
                 break;
             default:

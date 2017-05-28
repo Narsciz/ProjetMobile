@@ -38,7 +38,7 @@ public class AskServer
             // Cannot connect to port on given server host
             System.out.println("Cant connect to server at "+port+". Make sure it is running.");
             s = null;
-            return "Cant connect to server at "+port+". Make sure it is running.";
+            return ioe.getMessage();
 
         }
 
