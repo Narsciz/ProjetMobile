@@ -71,8 +71,9 @@ public class QCM {
         for (int i=0;i<questions.size();i++){
             if (res.getQuestions().get(i).isCorrect(questions.get(i)))
                 nbQuestionJuste++;
+
         }
-        return nbQuestionJuste/nbQuestion*100;
+        return (float)nbQuestionJuste/(float)nbQuestion*100.f;
 
     }
 

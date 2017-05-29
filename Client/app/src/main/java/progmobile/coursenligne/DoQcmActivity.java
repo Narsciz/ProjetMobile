@@ -1,7 +1,6 @@
 package progmobile.coursenligne;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -22,7 +19,7 @@ import java.util.Vector;
 import CommonClasses.QCM;
 import CommonClasses.Question;
 
-public class DoQcmActivity extends AppCompatActivity {
+public class DoQcmActivity extends AbstractActivity {
 
 
     QCM qcm=new QCM();
@@ -74,6 +71,7 @@ public class DoQcmActivity extends AppCompatActivity {
 
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        Toast.makeText(DoQcmActivity.this,qcmReponse.toString(),Toast.LENGTH_LONG).show();
                         qcm.getQuestions().get(index).getReponses().put(key,isChecked);
                     }
                 });
@@ -96,10 +94,11 @@ public class DoQcmActivity extends AppCompatActivity {
         TextView resultat=new TextView(this);
         resultat.setText("%");
         layout.addView(resultat);
-        valider.setOnClickListener(new OnClickListenerStringView(serialQcm,resultat){
+        valider.setOnClickListener(new OnClickListenerStringViewString(serialQcm,resultat,"validerQcm;"+idQcm){
             public void onClick(View v){
-                QCM reponseQcm= new QCM("reponses",string,-1);
-                textView.setText("Résultat : "+qcm.getResultat(reponseQcm)+"%");
+                //QCM reponseQcm= new QCM("reponses",string,-1);
+                textView.setText("Résultat : "+qcm.getResultat(qcmReponse)+"%");
+                new AskServerTask(DoQcmActivity.this,id).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         });
 

@@ -1,6 +1,7 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -68,7 +69,9 @@ public class IntitulesActivity extends AbstractActivity {
 
         switch(item.getItemId()){
             case R.id.item_home:
-                startActivity(new Intent(this,HomeActivity.class));
+                if (session.getEtudiant())
+                    new AskServerTask(this,"qcmAfaire;"+session.getIdMail()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                else startActivity(new Intent(this,HomeActivity.class));
                 break;
             case R.id.item_deconnexion:
                 startActivity(new Intent(this,AuthentificationActivity.class));

@@ -6,16 +6,18 @@ import android.widget.TextView;
 /**
  * Created by Millenium on 28/05/2017.
  */
-public class OnClickListenerStringView implements View.OnClickListener {
+public class OnClickListenerStringViewString implements View.OnClickListener {
     String string;
     TextView textView;
+    String id;
     @Override
     public void onClick(View v) {
 
     }
 
-    OnClickListenerStringView(String s,TextView v){
+    OnClickListenerStringViewString(String s, TextView v,String i){
         string=s;
         textView=v;
+        id=i;
     }
 }

@@ -1,11 +1,13 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class ChoixActivity extends AbstractActivity {
 
@@ -17,7 +19,7 @@ public class ChoixActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choix);
         Bundle b=getIntent().getExtras();
-        intitule=b.getString("intitule");
+        currentIntitule=b.getString("intitule");
     }
 
 
@@ -39,7 +41,9 @@ public class ChoixActivity extends AbstractActivity {
 
         switch(item.getItemId()){
             case R.id.item_home:
-                startActivity(new Intent(this,HomeActivity.class));
+                if (session.getEtudiant())
+                    new AskServerTask(this,"qcmAfaire;"+session.getIdMail()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                else startActivity(new Intent(this,HomeActivity.class));
                 break;
             case R.id.item_cours:
                 startActivity(new Intent(this,CreateCoursActivity.class));
@@ -58,11 +62,11 @@ public class ChoixActivity extends AbstractActivity {
 
     public void consulterCours(View view){
         String request="intituleCours;"+intitule+";cours";
-        new AskServerTask(this,request).execute();
+        new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void consulterQcm(View view){
         String request="intituleQcm;"+intitule+";qcm";
-        new AskServerTask(this,request).execute();
+        new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 }

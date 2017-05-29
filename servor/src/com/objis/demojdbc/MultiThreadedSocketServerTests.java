@@ -1,4 +1,6 @@
 package com.objis.demojdbc;
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,154 +12,61 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Vector;
-
-import CommonClasses.*;
 
 
-public class MultiThreadedSocketServer {
+public class MultiThreadedSocketServerTests {
 
     ServerSocket myServerSocket;
     boolean ServerOn = true;
-    DataBase db;
-
+    int port=1111;
 
     public static void main (String[] args) 
     { 
-        new MultiThreadedSocketServer();        
+        new MultiThreadedSocketServerTests();        
     } 
 
 
-	public String ProcessRequest(String request) {
+	private String ProcessRequest(String request) {
 		String resultat="";
-		String[] value = request.split(";");
-		
-		switch(value[0]){
-		default:
-									resultat="le serveur n'a pas pu traiter votre requete";
-									break;
-			
-		case "inscription": 		
-									boolean reussi = true;
-									try{
-										db.insertUtilisateur(new Utilisateur(value[1], value[4], value[3], Boolean.valueOf(value[5]), value[3], Annee.valueOf(value[6])));
-									}catch(Exception e)
-									{
-										reussi = false;
-									}
-									resultat = "inscription;" + reussi;	
-									break;
-									
-		case "authentification": 
-									boolean connecte = true;
-									resultat = "authentification";
-									try{
-										Vector<String> attribute = new Vector<String>();
-										attribute.add("_idmail");
-										attribute.add("MotDePasse");
-										Vector<String> attributeValue = new Vector<String>();
-										attributeValue.add(value[1]);
-										attributeValue.add(value[2]);
-										Vector<Utilisateur> utilisateurs = db.getUtilisateursByAttributes(attribute, attributeValue);
-										if(utilisateurs.size()>0)
-										{
-											Utilisateur utilisateur = utilisateurs.get(0);
-											resultat += ";"+connecte+";" + utilisateur.getPrenom() + ";"+utilisateur.getNom()+";"+utilisateur.getEtudiant()+";"+utilisateur.getAnnee().name();
-										}
-										else
-										{
-											connecte = false;
-										}
-									}catch(Exception e)
-									{
-										connecte = false;
-									}
-									if(!connecte)
-										resultat += ";" + false;
-									break;
+		String[] r=request.split(";");
+		switch(r[0]){
+		case "authentification":
+			resultat="authentification;sacha;weill;false;none";
+			break;
+		case "inscription":
+			resultat="inscription;true";
+			break;
 		case "matiere":
-									Vector<String> intitules = new Vector<String>();
-									try{
-										 intitules = db.getIntituleFromMatiere(Matiere.valueOf(value[1]));
-										for(int i = 0; i<intitules.size(); i++)
-										{
-											Vector<String> attribute = new Vector<String>();
-											attribute.add("Intitule_id");
-											attribute.add("Annee");
-											Vector<String> attributeValue = new Vector<String>();
-											attributeValue.add(intitules.get(i));
-											attributeValue.add(value[2]);
-											Vector<Cours> cours = db.getCoursByAttributes(attribute, attributeValue);
-											if(cours.size() == 0)
-											{
-												intitules.remove(i);
-												i--;
-											}
-										}
-									}catch(Exception e)
-									{
-										
-									}
-									resultat = "matiere";
-									for(int i = 0; i<intitules.size(); i++)
-									{
-										resultat += ";" + intitules.get(i);
-									}
-									return resultat;
-		case "intitulecours":		
-									try{
-										Vector<Cours> cours = new Vector<Cours>();
-										Vector<String> attribute = new Vector<String>();
-										attribute.add("Intitule_id");
-										Vector<String> attributeValue = new Vector<String>();
-										attributeValue.add(value[1]);
-										cours = db.getCoursByAttributes(attribute, attributeValue);
-										resultat = "intitule";
-										for(int i = 0; i<cours.size(); i++)
-										{
-											resultat += ";" + cours.get(i).getNom() + "|" + cours.get(i).getFormat().name() + "|" + cours.get(i).getPath();
-										}
-										return resultat;
-									}catch(Exception e)
-									{
-										
-									}
-									
-		case "intituleqcm":			Vector<QCM> qcm = new Vector<QCM>();
-									try{
-									Vector<String> attribute = new Vector<String>();
-									attribute.add("Intitule_id");
-									Vector<String> attributeValue = new Vector<String>();
-									attributeValue.add(value[1]);
-									//cours = db.getQCMByAttributes(attribute, attributeValue);
-									resultat = "intitule";
-									for(int i = 0; i<qcm.size(); i++)
-									{
-										resultat += ";" + qcm.get(i).getNom() + "|" + qcm.get(i).getId();
-									}
-									return resultat;
-									}catch(Exception e)
-									{
-			
-									}
-		case "qcm" :
-		case "validerqcm" :
-		case "qcmafaire" :
+			resultat="matiere;HMIN207;HMMA504;tototata";
+			break;
+		case "intituleCours":
+			resultat="intituleCours;coursVideo|video|vZrTUc5XeL8;coursPdf|pdf|http://www.carnegiemnh.org/uploadedFiles/CMNH_Site/Learn_with_Us/Downloads/Diplodocus.pdf";
+			break;
+		case "intituleQcm":
+			resultat="intituleQcm;Qcm1|idQcm1;Qcm2|idQcm2";
+			break;
+		case "qcm":
+			resultat="qcm;Qu'elle est la couleur du cheval blanc d'henry IV ?|blanc@false#noir@true#rose@false;"
+					+ "Combien font 2+2 ?|4@true#3+1@true#5-2@false";
+			break;
+		case "qcmAfaire":
+			resultat="qcmAfaire;Qcm à faire 1|idQcmAfaire1;Qcm à faire 2|idQcmAfaire2";
+			break;
+		default:
+			resultat="le serveur n'a pas pu traiter votre requete";
 		}
-		
 		return resultat;
 	} 
 	
-    public MultiThreadedSocketServer() 
+    public MultiThreadedSocketServerTests() 
     { 
-    	db = new DataBase();
         try 
         { 
-            myServerSocket = new ServerSocket(11111); 
+            myServerSocket = new ServerSocket(port); 
         } 
         catch(IOException ioe) 
         { 
-            System.out.println("Could not create server socket on port 11111. Quitting."); 
+            System.out.println("Could not create server socket on port "+port+". Quitting."); 
             System.exit(-1); 
         } 
 
