@@ -1,0 +1,380 @@
+package com.objis.demojdbc;
+import java.sql.SQLException;
+import java.util.Vector;
+
+import CommonClasses.*;
+
+public class Main {
+
+	public static void main(String[] args) throws SQLException {
+		DataBase db = new DataBase();
+		
+		//System.out.println(ProcessRequest("intitulecours;HLIN101", db));
+		
+		//Création cours video
+		/*System.out.println(ProcessRequest("creationcours;Cours vidéo L1 info;HLIN101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L1 info;HLIN102;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L2 info;HLIN201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L2 info;HLIN202;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L3 info;HLIN301;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L3 info;HLIN302;video;YYvWpVz770k", db));		
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M1 info;HMIN101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M1 info;HMIN102;video;YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M2 info;HMIN201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M2 info;HMIN202;video;YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours vidéo info;HIN1;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo info;HIN2;video;YYvWpVz770k", db));	
+		
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L1 bio;HLBI101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L1 bio;HLBI102;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L2 bio;HLBI201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L2 bio;HLBI202;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L3 bio;HLBI301;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L3 bio;HLBI302;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M1 bio;HMBI101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M1 bio;HMBI102;video;YYvWpVz770k", db));		
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M2 bio;HMBI201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M2 bio;HMBI202;video;YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours vidéo bio;HBI;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo bio;HBI2;video;YYvWpVz770k", db));	
+		
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L1 math;HLMA101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L1 math;HLMA102;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L2 math;HLMA201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L2 math;HLMA202;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L3 math;HLMA301;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L3 math;HLMA302;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M1 math;HMMA101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M1 math;HMMA102;video;YYvWpVz770k", db));		
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M2 math;HMMA201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M2 math;HMMA202;video;YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours vidéo math;HMA;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo math;HMA2;video;YYvWpVz770k", db));	*/
+		
+		//Creation cours pdf
+		/*System.out.println(ProcessRequest("creationcours;Cours 1 L1 info;HLIN101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 L1 info;HLIN102;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 1 L2 info;HLIN201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 L2 info;HLIN202;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 1 L3 info;HLIN301;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 L3 info;HLIN302;video;YYvWpVz770k", db));		
+		System.out.println(ProcessRequest("creationcours;Cours 1 M1 info;HMIN101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 M1 info;HMIN102;video;YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours 1 M2 info;HMIN201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 M2 info;HMIN202;video;YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours 1 info;HIN1;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 info;HIN2;video;YYvWpVz770k", db));	
+		
+		System.out.println(ProcessRequest("creationcours;Cours 1 L1 bio;HLBI101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 L1 bio;HLBI102;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 1 L2 bio;HLBI201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 L2 bio;HLBI202;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 1 L3 bio;HLBI301;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 L3 bio;HLBI302;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 1 M1 bio;HMBI101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 M1 bio;HMBI102;video;YYvWpVz770k", db));		
+		System.out.println(ProcessRequest("creationcours;Cours 1 M2 bio;HMBI201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 M2 bio;HMBI202;video;YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours 1 bio;HBI;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 bio;HBI2;video;YYvWpVz770k", db));	
+		
+		System.out.println(ProcessRequest("creationcours;Cours 1 L1 math;HLMA101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 L1 math;HLMA102;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 1 L2 math;HLMA201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 L2 math;HLMA202;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 1 L3 math;HLMA301;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 L3 math;HLMA302;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 1 M1 math;HMMA101;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 M1 math;HMMA102;video;YYvWpVz770k", db));		
+		System.out.println(ProcessRequest("creationcours;Cours 1 M2 math;HMMA201;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 M2 math;HMMA202;video;YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours 1 math;HMA;video;YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours 2 math;HMA2;video;YYvWpVz770k", db));	*/
+		
+		//Creation QCM
+		/*System.out.println(ProcessRequest("creationqcm;QCM 1 L1 info;HLIN101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L1 info;HLIN101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L1 info;HLIN102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L1 info;HLIN102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L2 info;HLIN201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L2 info;HLIN201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L2 info;HLIN202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L2 info;HLIN202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L3 info;HLIN301;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L3 info;HLIN301;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L3 info;HLIN302;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L3 info;HLIN302;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M1 info;HMIN101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M1 info;HMIN101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M1 info;HMIN102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M1 info;HMIN102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M2 info;HMIN201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M2 info;HMIN201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M2 info;HMIN202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M2 info;HMIN202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 info;HIN;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 info;HIN;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 info;HIN;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 info;HIN;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		
+
+
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L1 bio;HLBI101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L1 bio;HLBI101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L1 bio;HLBI102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L1 bio;HLBI102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L2 bio;HLBI201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L2 bio;HLBI201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L2 bio;HLBI202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L2 bio;HLBI202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L3 bio;HLBI301;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L3 bio;HLBI301;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L3 bio;HLBI302;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L3 bio;HLBI302;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M1 bio;HMBI101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M1 bio;HMBI101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M1 bio;HMBI102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M1 bio;HMBI102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M2 bio;HMBI201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M2 bio;HMBI201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M2 bio;HMBI202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M2 bio;HMBI202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 bio;HBI;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 bio;HBI;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 bio;HBI;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 bio;HBI;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		
+		
+		
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L1 math;HLMA101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L1 math;HLMA101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L1 math;HLMA102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L1 math;HLMA102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L1.com|test1@L1.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L2 math;HLMA201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L2 math;HLMA201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L2 math;HLMA202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L2 math;HLMA202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L2.com|test1@L2.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L3 math;HLMA301;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L3 math;HLMA301;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 L3 math;HLMA302;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 L3 math;HLMA302;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@L3.com|test1@L3.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M1 math;HMMA101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M1 math;HMMA101;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M1 math;HMMA102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M1 math;HMMA102;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M1.com|test1@M1.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M2 math;HMMA201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M2 math;HMMA201;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 M2 math;HMMA202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 M2 math;HMMA202;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;test2@M2.com|test1@M2.com", db));
+		
+		System.out.println(ProcessRequest("creationqcm;QCM 1 math;HMA;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 math;HMA;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 1 math;HMA;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));
+		System.out.println(ProcessRequest("creationqcm;QCM 2 math;HMA;Question 1?|Réponse 1.1@true&Réponse 1.2@false&Réponse 1.3@false$Question 2?|Réponse 2.1@true&Réponse 2.2@false&Réponse 2.3@false$Question 3?|Réponse 3.1@true&Réponse 3.2@false&Réponse 3.3@false;", db));*/
+		
+		//System.out.println(ProcessRequest("qcmafaire;test1@L2.com", db));
+		//System.out.println(ProcessRequest("validerqcm;13;test1@L2.com", db));
+		System.out.println("getusers;HLIN102");
+		
+	}
+
+	public static String ProcessRequest(String request, DataBase db) {
+		String resultat="";
+		String[] value = request.split(";");
+		
+		switch(value[0]){
+		default:
+									resultat="Type de requete inconnu";
+									break;
+			
+		case "inscription": 		
+									boolean reussi = true;
+									try{
+										db.insertUtilisateur(new Utilisateur(value[1], value[4], value[3], Boolean.valueOf(value[5]), value[2], Annee.valueOf(value[6])));
+									}catch(Exception e)
+									{
+										reussi = false;
+									}
+									resultat = "inscription;" + reussi;	
+									break;
+									
+		case "authentification": 
+									boolean connecte = true;
+									resultat = "authentification";
+									try{
+										Vector<String> attribute = new Vector<String>();
+										attribute.add("_idmail");
+										attribute.add("MotDePasse");
+										Vector<String> attributeValue = new Vector<String>();
+										attributeValue.add(value[1]);
+										attributeValue.add(value[2]);
+										Vector<Utilisateur> utilisateurs = db.getUtilisateursByAttributes(attribute, attributeValue);
+										if(utilisateurs.size()>0)
+										{
+											Utilisateur utilisateur = utilisateurs.get(0);
+											resultat += ";"+connecte+";" + utilisateur.getPrenom() + ";"+utilisateur.getNom()+";"+utilisateur.getEtudiant()+";"+utilisateur.getAnnee().name();
+										}
+										else
+										{
+											connecte = false;
+										}
+									}catch(Exception e)
+									{
+										connecte = false;
+									}
+									if(!connecte)
+										resultat += ";" + false;
+									break;
+		case "matiere":
+									Vector<String> intitules = new Vector<String>();
+									try{
+										 intitules = db.getIntituleFromMatiere(Matiere.valueOf(value[1]), Annee.valueOf(value[2]));
+									}catch(Exception e)
+									{
+										
+									}
+									resultat = "matiere";
+									for(int i = 0; i<intitules.size(); i++)
+									{
+										resultat += ";" + intitules.get(i);
+									}
+									break;
+		case "intitulecours":		
+									try{
+										Vector<Cours> cours = new Vector<Cours>();
+										Vector<String> attribute = new Vector<String>();
+										attribute.add("Intitule_id");
+										Vector<String> attributeValue = new Vector<String>();
+										attributeValue.add(value[1]);
+										cours = db.getCoursByAttributes(attribute, attributeValue);
+										resultat = "intitule";
+										for(int i = 0; i<cours.size(); i++)
+										{
+											resultat += ";" + cours.get(i).getNom() + "|" + cours.get(i).getFormat().name() + "|" + cours.get(i).getPath();
+										}
+									}catch(Exception e)
+									{
+										
+									}
+									break;
+		case "intituleqcm":			Vector<QCM> qcm = new Vector<QCM>();
+									try{
+									Vector<String> attribute = new Vector<String>();
+									attribute.add("Intitule_id");
+									Vector<String> attributeValue = new Vector<String>();
+									attributeValue.add(value[1]);
+									qcm = db.getQCMByAttributes(attribute, attributeValue);
+									resultat = "intitule";
+									for(int i = 0; i<qcm.size(); i++)
+									{
+										resultat += ";" + qcm.get(i).getNom() + "|" + qcm.get(i).getId();
+									}
+									}catch(Exception e)
+									{
+										
+									}
+									break;
+		case "qcm" :				Vector<QCM> qcmget = new Vector<QCM>();
+									try{
+											Vector<String> attribute = new Vector<String>();
+											attribute.add("_id");
+											Vector<String> attributeValue = new Vector<String>();
+											attributeValue.add(value[1]);
+											qcmget = db.getQCMByAttributes(attribute, attributeValue);
+											resultat = "qcm;"+qcmget.get(0).getCode();									
+									}catch(Exception e)
+									{
+			
+									}
+									break;
+									
+		case "validerqcm" :			
+									boolean validation = true;
+									try{
+										db.deleteQCMCandidat(Integer.parseInt(value[1]), value[2]);
+									}catch(Exception e)
+									{
+										validation = false;
+									}
+									resultat = "validerqcm" + validation;
+									break;
+		case "qcmafaire" :			String sql = "Select QCM._id, Nom, Intitule_id, Code from QCM, QCMCandidat where QCM._id = QCM_id and Utilisateur_id = '" + value[1] + "';";
+									try{
+									Vector<QCM> qcms = db.executeQueryOnQCMTable(sql);
+									resultat = "qcmafaire";
+									for(int i = 0; i <qcms.size(); i++)
+									{
+										resultat += ";" + qcms.get(i).getNom() + "|" + qcms.get(i).getId();
+									}
+									}catch(Exception e)
+									{
+										
+									}
+									break;
+		case "creationqcm" :		QCM qcmInsert = new QCM(-1, value[1], value[2], value[3]);
+
+									if(value.length>4)
+									{
+										String[] qcmCandidat = value[4].split("\\|");
+
+										Vector<String> usersCandidat = new Vector<String>();
+										for(int i =0 ; i<qcmCandidat.length; i++)
+										{
+											usersCandidat.add(qcmCandidat[i]);
+										}
+										qcmInsert.setDestinataires(usersCandidat);
+									}
+									boolean insertQCM = true;
+									try{
+										db.insertQCM(qcmInsert);
+									}catch(Exception e)
+									{
+										insertQCM = false;
+									}
+									resultat = "creationqcm;"+insertQCM;
+									break;
+		case "creationcours":
+									Cours coursinsert = new Cours(-1, value[2], value[1], Format.valueOf(value[3]), value[4]);
+									boolean insertCours = true;
+									try{
+										db.insertCours(coursinsert);
+									}catch(Exception e)
+									{
+										insertCours = false;
+									}
+									resultat = "creationcours;" + insertCours;
+									break;
+		case "getusers":
+									String sqlUser = "Select idMail, Nom, Prenom, Etudiant, MotDePasse, Utilisateur.Annee from Utilisateur, AnneeAuthorisee where Utilisateur.Annee = AnneeAuthorisee.Annee and Intitule_id = '" + value[1] + "';";
+									try{
+										Vector<Utilisateur> users = db.executeQueryOnUtilisateurTable(sqlUser);
+										resultat = "getusers";
+										for(int i = 0; i <users.size(); i++)
+										{
+											resultat += ";" + users.get(i).getIdMail() + "|" + users.get(i).getNom() + "|" + users.get(i).getPrenom();
+										}
+										}catch(Exception e)
+										{
+											
+										}
+										break;
+		}
+		
+		return resultat;
+	} 
+}
