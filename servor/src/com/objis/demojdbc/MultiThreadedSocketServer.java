@@ -34,13 +34,13 @@ public class MultiThreadedSocketServer {
 		
 		switch(value[0]){
 		default:
-									resultat="le serveur n'a pas pu traiter votre requete";
+									resultat="Type de requete inconnu";
 									break;
 			
 		case "inscription": 		
 									boolean reussi = true;
 									try{
-										db.insertUtilisateur(new Utilisateur(value[1], value[4], value[3], Boolean.valueOf(value[5]), value[3], Annee.valueOf(value[6])));
+										db.insertUtilisateur(new Utilisateur(value[1], value[4], value[3], Boolean.valueOf(value[5]), value[2], Annee.valueOf(value[6])));
 									}catch(Exception e)
 									{
 										reussi = false;
@@ -48,7 +48,7 @@ public class MultiThreadedSocketServer {
 									resultat = "inscription;" + reussi;	
 									break;
 									
-		case "authenthification": 
+		case "authentification": 
 									boolean connecte = true;
 									resultat = "authentification";
 									try{
@@ -78,22 +78,7 @@ public class MultiThreadedSocketServer {
 		case "matiere":
 									Vector<String> intitules = new Vector<String>();
 									try{
-										 intitules = db.getIntituleFromMatiere(Matiere.valueOf(value[1]));
-										for(int i = 0; i<intitules.size(); i++)
-										{
-											Vector<String> attribute = new Vector<String>();
-											attribute.add("Intitule_id");
-											attribute.add("Annee");
-											Vector<String> attributeValue = new Vector<String>();
-											attributeValue.add(intitules.get(i));
-											attributeValue.add(value[2]);
-											Vector<Cours> cours = db.getCoursByAttributes(attribute, attributeValue);
-											if(cours.size() == 0)
-											{
-												intitules.remove(i);
-												i--;
-											}
-										}
+										 intitules = db.getIntituleFromMatiere(Matiere.valueOf(value[1]), Annee.valueOf(value[2]));
 									}catch(Exception e)
 									{
 										
@@ -103,7 +88,7 @@ public class MultiThreadedSocketServer {
 									{
 										resultat += ";" + intitules.get(i);
 									}
-									return resultat;
+									break;
 		case "intitulecours":		
 									try{
 										Vector<Cours> cours = new Vector<Cours>();
@@ -117,32 +102,112 @@ public class MultiThreadedSocketServer {
 										{
 											resultat += ";" + cours.get(i).getNom() + "|" + cours.get(i).getFormat().name() + "|" + cours.get(i).getPath();
 										}
-										return resultat;
 									}catch(Exception e)
 									{
 										
 									}
-									
+									break;
 		case "intituleqcm":			Vector<QCM> qcm = new Vector<QCM>();
 									try{
 									Vector<String> attribute = new Vector<String>();
 									attribute.add("Intitule_id");
 									Vector<String> attributeValue = new Vector<String>();
 									attributeValue.add(value[1]);
-									//cours = db.getQCMByAttributes(attribute, attributeValue);
+									qcm = db.getQCMByAttributes(attribute, attributeValue);
 									resultat = "intitule";
 									for(int i = 0; i<qcm.size(); i++)
 									{
 										resultat += ";" + qcm.get(i).getNom() + "|" + qcm.get(i).getId();
 									}
-									return resultat;
+									}catch(Exception e)
+									{
+										
+									}
+									break;
+		case "qcm" :				Vector<QCM> qcmget = new Vector<QCM>();
+									try{
+											Vector<String> attribute = new Vector<String>();
+											attribute.add("_id");
+											Vector<String> attributeValue = new Vector<String>();
+											attributeValue.add(value[1]);
+											qcmget = db.getQCMByAttributes(attribute, attributeValue);
+											resultat = "qcm;"+qcmget.get(0).getCode();									
 									}catch(Exception e)
 									{
 			
 									}
-		case "qcm" :
-		case "validerqcm" :
-		case "qcmafaire" :
+									break;
+									
+		case "validerqcm" :			
+									boolean validation = true;
+									try{
+										db.deleteQCMCandidat(Integer.parseInt(value[1]), value[2]);
+									}catch(Exception e)
+									{
+										validation = false;
+									}
+									resultat = "validerqcm" + validation;
+									break;
+		case "qcmafaire" :			String sql = "Select QCM._id, Nom, Intitule_id, Code from QCM, QCMCandidat where QCM._id = QCM_id and Utilisateur_id = '" + value[1] + "';";
+									try{
+									Vector<QCM> qcms = db.executeQueryOnQCMTable(sql);
+									resultat = "qcmafaire";
+									for(int i = 0; i <qcms.size(); i++)
+									{
+										resultat += ";" + qcms.get(i).getNom() + "|" + qcms.get(i).getId();
+									}
+									}catch(Exception e)
+									{
+										
+									}
+									break;
+		case "creationqcm" :		QCM qcmInsert = new QCM(-1, value[1], value[2], value[3]);
+
+									if(value.length>4)
+									{
+										String[] qcmCandidat = value[4].split("\\|");
+
+										Vector<String> usersCandidat = new Vector<String>();
+										for(int i =0 ; i<qcmCandidat.length; i++)
+										{
+											usersCandidat.add(qcmCandidat[i]);
+										}
+										qcmInsert.setDestinataires(usersCandidat);
+									}
+									boolean insertQCM = true;
+									try{
+										db.insertQCM(qcmInsert);
+									}catch(Exception e)
+									{
+										insertQCM = false;
+									}
+									resultat = "creationqcm;"+insertQCM;
+									break;
+		case "creationcours":
+									Cours coursinsert = new Cours(-1, value[2], value[1], Format.valueOf(value[3]), value[4]);
+									boolean insertCours = true;
+									try{
+										db.insertCours(coursinsert);
+									}catch(Exception e)
+									{
+										insertCours = false;
+									}
+									resultat = "creationcours;" + insertCours;
+									break;
+		case "getusers":
+									String sqlUser = "Select _idMail, Nom, Prenom, Etudiant, MotDePasse, Utilisateur.Annee from Utilisateur, AnneeAuthorisee where (Utilisateur.Annee = AnneeAuthorisee.Annee or AnneeAuthorisee.Annee = 'None') and Intitule_id = '" + value[1] + "';";
+									try{
+										Vector<Utilisateur> users = db.executeQueryOnUtilisateurTable(sqlUser);
+										resultat = "getusers";
+										for(int i = 0; i <users.size(); i++)
+										{
+											resultat += ";" + users.get(i).getIdMail() + "|" + users.get(i).getNom() + "|" + users.get(i).getPrenom();
+										}
+										}catch(Exception e)
+										{
+											
+										}
+										break;
 		}
 		
 		return resultat;
@@ -151,6 +216,8 @@ public class MultiThreadedSocketServer {
     public MultiThreadedSocketServer() 
     { 
     	db = new DataBase();
+    	
+    	
         try 
         { 
             myServerSocket = new ServerSocket(11111); 

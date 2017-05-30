@@ -1,0 +1,202 @@
+package com.objis.demojdbc;
+import java.sql.SQLException;
+import java.util.Vector;
+
+import CommonClasses.*;
+
+public class Main {
+
+	public static void main(String[] args) throws SQLException {
+		DataBase db = new DataBase();
+		
+		System.out.println(ProcessEvent("matiere;Biologie;L1"));
+		//Création cours video
+		/*System.out.println(ProcessRequest("creationcours;Cours vidéo L1 info;Informatique;HLIN101;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L1 info;Informatique;HLIN102;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L2 info;Informatique;HLIN201;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L2 info;Informatique;HLIN202;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L3 info;Informatique;HLIN301;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L3 info;Informatique;HLIN302;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));		
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M1 info;Informatique;HMIN101;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M1 info;Informatique;HMIN102;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M2 info;Informatique;HMIN201;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M2 info;Informatique;HMIN202;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours vidéo info;Informatique;HIN1;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo info;Informatique;HIN2;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L1 bio;Biologie;HLBI101;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L1 bio;Biologie;HLBI102;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L2 bio;Biologie;HLBI201;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L2 bio;Biologie;HLBI202;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L3 bio;Biologie;HLBI301;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L3 bio;Biologie;HLBI302;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M1 bio;Biologie;HMBI101;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M1 bio;Biologie;HMBI102;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));		
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M2 bio;Biologie;HMBI201;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M2 bio;Biologie;HMBI202;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours vidéo bio;Biologie;HBI;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo bio;Biologie;HBI2;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L1 math;Mathematiques;HLMA101;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L1 math;Mathematiques;HLMA102;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L2 math;Mathematiques;HLMA201;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L2 math;Mathematiques;HLMA202;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo L3 math;Mathematiques;HLMA301;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo L3 math;Mathematiques;HLMA302;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M1 math;Mathematiques;HMMA101;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M1 math;Mathematiques;HMMA102;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));		
+		System.out.println(ProcessRequest("creationcours;Cours vidéo M2 math;Mathematiques;HMMA201;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo M2 math;Mathematiques;HMMA202;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));
+		System.out.println(ProcessRequest("creationcours;Cours vidéo math;Mathematiques;HMA;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	
+		System.out.println(ProcessRequest("creationcours;Conférence vidéo math;Mathematiques;HMA2;video;https://www.youtube.com/watch?v=YYvWpVz770k", db));	*/
+		
+	}
+
+	public static String ProcessRequest(String request, DataBase db) {
+		String resultat="";
+		String[] value = request.split(";");
+		
+		switch(value[0]){
+		default:
+									resultat="Type de requete inconnu";
+									break;
+			
+		case "inscription": 		
+									boolean reussi = true;
+									try{
+										db.insertUtilisateur(new Utilisateur(value[1], value[4], value[3], Boolean.valueOf(value[5]), value[2], Annee.valueOf(value[6])));
+									}catch(Exception e)
+									{
+										reussi = false;
+									}
+									resultat = "inscription;" + reussi;	
+									break;
+									
+		case "authentification": 
+									boolean connecte = true;
+									resultat = "authentification";
+									try{
+										Vector<String> attribute = new Vector<String>();
+										attribute.add("_idmail");
+										attribute.add("MotDePasse");
+										Vector<String> attributeValue = new Vector<String>();
+										attributeValue.add(value[1]);
+										attributeValue.add(value[2]);
+										Vector<Utilisateur> utilisateurs = db.getUtilisateursByAttributes(attribute, attributeValue);
+										if(utilisateurs.size()>0)
+										{
+											Utilisateur utilisateur = utilisateurs.get(0);
+											resultat += ";"+connecte+";" + utilisateur.getPrenom() + ";"+utilisateur.getNom()+";"+utilisateur.getEtudiant()+";"+utilisateur.getAnnee().name();
+										}
+										else
+										{
+											connecte = false;
+										}
+									}catch(Exception e)
+									{
+										connecte = false;
+									}
+									if(!connecte)
+										resultat += ";" + false;
+									break;
+		case "matiere":
+									Vector<String> intitules = new Vector<String>();
+									try{
+										 intitules = db.getIntituleFromMatiere(Matiere.valueOf(value[1]), Annee.valueOf(value[2]));
+									}catch(Exception e)
+									{
+										
+									}
+									resultat = "matiere";
+									for(int i = 0; i<intitules.size(); i++)
+									{
+										resultat += ";" + intitules.get(i);
+									}
+									break;
+		case "intitulecours":		
+									try{
+										Vector<Cours> cours = new Vector<Cours>();
+										Vector<String> attribute = new Vector<String>();
+										attribute.add("Intitule_id");
+										Vector<String> attributeValue = new Vector<String>();
+										attributeValue.add(value[1]);
+										cours = db.getCoursByAttributes(attribute, attributeValue);
+										resultat = "intitule";
+										for(int i = 0; i<cours.size(); i++)
+										{
+											resultat += ";" + cours.get(i).getNom() + "|" + cours.get(i).getFormat().name() + "|" + cours.get(i).getPath();
+										}
+									}catch(Exception e)
+									{
+										
+									}
+									break;
+		case "intituleqcm":			Vector<QCM> qcm = new Vector<QCM>();
+									try{
+									Vector<String> attribute = new Vector<String>();
+									attribute.add("Intitule_id");
+									Vector<String> attributeValue = new Vector<String>();
+									attributeValue.add(value[1]);
+									qcm = db.getQCMByAttributes(attribute, attributeValue);
+									resultat = "intitule";
+									for(int i = 0; i<qcm.size(); i++)
+									{
+										resultat += ";" + qcm.get(i).getNom() + "|" + qcm.get(i).getId();
+									}
+									}catch(Exception e)
+									{
+										
+									}
+									break;
+		case "qcm" :				Vector<QCM> qcmget = new Vector<QCM>();
+									try{
+											Vector<String> attribute = new Vector<String>();
+											attribute.add("_id");
+											Vector<String> attributeValue = new Vector<String>();
+											attributeValue.add(value[1]);
+											qcmget = db.getQCMByAttributes(attribute, attributeValue);
+											resultat = "QCM;"+qcmget.get(0).getCode();									
+									}catch(Exception e)
+									{
+			
+									}
+									break;
+									
+		case "validerqcm" :			
+									boolean validation = true;
+									try{
+										db.deleteQCMCandidat(Integer.parseInt(value[1]), value[2]);
+									}catch(Exception e)
+									{
+										validation = false;
+									}
+									resultat = "validerqcm" + validation;
+									break;
+		case "qcmafaire" :
+									
+		case "creationqcm" :		QCM qcmInsert = new QCM(-1, value[1], Matiere.valueOf(value[2]), value[3], value[4]);
+									boolean insertQCM = true;
+									try{
+										db.insertQCM(qcmInsert);
+									}catch(Exception e)
+									{
+										insertQCM = false;
+									}
+									resultat = "creationqcm;"+insertQCM;
+									break;
+		case "creationcours":
+									Cours coursinsert = new Cours(-1, value[3], Matiere.valueOf(value[2]), value[1], Format.valueOf(value[4]), value[5]);
+									boolean insertCours = true;
+									try{
+										db.insertCours(coursinsert);
+									}catch(Exception e)
+									{
+										insertCours = false;
+									}
+									resultat = "creationcours;" + insertCours;
+									break;
+		}
+		
+		return resultat;
+	} 
+}

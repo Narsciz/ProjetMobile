@@ -1,0 +1,200 @@
+package com.objis.demojdbc;
+import java.sql.SQLException;
+import java.util.Vector;
+
+import CommonClasses.*;
+
+public class Main {
+
+	public static void main(String[] args) throws SQLException {
+		DataBase db = new DataBase();
+		db.insertIntitule("HLIN101", Matiere.Informatique, Annee.L1);
+		db.insertIntitule("HLIN102", Matiere.Informatique, Annee.L1);
+		db.insertIntitule("HLIN201", Matiere.Informatique, Annee.L2);
+		db.insertIntitule("HLIN202", Matiere.Informatique, Annee.L2);
+		db.insertIntitule("HLIN301", Matiere.Informatique, Annee.L3);
+		db.insertIntitule("HLIN302", Matiere.Informatique, Annee.L3);
+		db.insertIntitule("HMIN101", Matiere.Informatique, Annee.M1);
+		db.insertIntitule("HMIN102", Matiere.Informatique, Annee.M1);
+		db.insertIntitule("HMIN201", Matiere.Informatique, Annee.M2);
+		db.insertIntitule("HMIN202", Matiere.Informatique, Annee.M2);
+		db.insertIntitule("HIN1", Matiere.Informatique, Annee.None);
+		db.insertIntitule("HIN2", Matiere.Informatique, Annee.None);
+		
+		
+		db.insertIntitule("HLBI101", Matiere.Biologie, Annee.L1);
+		db.insertIntitule("HLBI102", Matiere.Biologie, Annee.L1);
+		db.insertIntitule("HLBI201", Matiere.Biologie, Annee.L2);
+		db.insertIntitule("HLBI202", Matiere.Biologie, Annee.L2);
+		db.insertIntitule("HLBI301", Matiere.Biologie, Annee.L3);
+		db.insertIntitule("HLBI302", Matiere.Biologie, Annee.L3);
+		db.insertIntitule("HMBI101", Matiere.Biologie, Annee.M1);
+		db.insertIntitule("HMBI102", Matiere.Biologie, Annee.M1);
+		db.insertIntitule("HMBI201", Matiere.Biologie, Annee.M2);
+		db.insertIntitule("HMBI202", Matiere.Biologie, Annee.M2);
+		db.insertIntitule("HBI1", Matiere.Biologie, Annee.None);
+		db.insertIntitule("HBI2", Matiere.Biologie, Annee.None);
+		
+		db.insertIntitule("HLMA101", Matiere.Mathematiques, Annee.L1);
+		db.insertIntitule("HLMA102", Matiere.Mathematiques, Annee.L1);
+		db.insertIntitule("HLMA201", Matiere.Mathematiques, Annee.L2);
+		db.insertIntitule("HLMA202", Matiere.Mathematiques, Annee.L2);
+		db.insertIntitule("HLMA301", Matiere.Mathematiques, Annee.L3);
+		db.insertIntitule("HLMA302", Matiere.Mathematiques, Annee.L3);
+		db.insertIntitule("HMMA101", Matiere.Mathematiques, Annee.M1);
+		db.insertIntitule("HMMA102", Matiere.Mathematiques, Annee.M1);
+		db.insertIntitule("HMMA201", Matiere.Mathematiques, Annee.M2);
+		db.insertIntitule("HMMA202", Matiere.Mathematiques, Annee.M2);
+		db.insertIntitule("HMA1", Matiere.Mathematiques, Annee.None);
+		db.insertIntitule("HMA2", Matiere.Mathematiques, Annee.None);
+		//System.out.println(ProcessRequest("matiere;Biologie;L1", db));	
+	}
+
+	public static String ProcessRequest(String request, DataBase db) {
+		String resultat="";
+		String[] value = request.split(";");
+		
+		switch(value[0]){
+		default:
+									resultat="Type de requete inconnu";
+									break;
+			
+		case "inscription": 		
+									boolean reussi = true;
+									try{
+										db.insertUtilisateur(new Utilisateur(value[1], value[4], value[3], Boolean.valueOf(value[5]), value[2], Annee.valueOf(value[6])));
+									}catch(Exception e)
+									{
+										reussi = false;
+									}
+									resultat = "inscription;" + reussi;	
+									break;
+									
+		case "authentification": 
+									boolean connecte = true;
+									resultat = "authentification";
+									try{
+										Vector<String> attribute = new Vector<String>();
+										attribute.add("_idmail");
+										attribute.add("MotDePasse");
+										Vector<String> attributeValue = new Vector<String>();
+										attributeValue.add(value[1]);
+										attributeValue.add(value[2]);
+										Vector<Utilisateur> utilisateurs = db.getUtilisateursByAttributes(attribute, attributeValue);
+										if(utilisateurs.size()>0)
+										{
+											Utilisateur utilisateur = utilisateurs.get(0);
+											resultat += ";"+connecte+";" + utilisateur.getPrenom() + ";"+utilisateur.getNom()+";"+utilisateur.getEtudiant()+";"+utilisateur.getAnnee().name();
+										}
+										else
+										{
+											connecte = false;
+										}
+									}catch(Exception e)
+									{
+										connecte = false;
+									}
+									if(!connecte)
+										resultat += ";" + false;
+									break;
+		case "matiere":
+									Vector<String> intitules = new Vector<String>();
+									try{
+										 intitules = db.getIntituleFromMatiere(Matiere.valueOf(value[1]), Annee.valueOf(value[2]));
+									}catch(Exception e)
+									{
+										
+									}
+									resultat = "matiere";
+									for(int i = 0; i<intitules.size(); i++)
+									{
+										resultat += ";" + intitules.get(i);
+									}
+									break;
+		case "intitulecours":		
+									try{
+										Vector<Cours> cours = new Vector<Cours>();
+										Vector<String> attribute = new Vector<String>();
+										attribute.add("Intitule_id");
+										Vector<String> attributeValue = new Vector<String>();
+										attributeValue.add(value[1]);
+										cours = db.getCoursByAttributes(attribute, attributeValue);
+										resultat = "intitule";
+										for(int i = 0; i<cours.size(); i++)
+										{
+											resultat += ";" + cours.get(i).getNom() + "|" + cours.get(i).getFormat().name() + "|" + cours.get(i).getPath();
+										}
+									}catch(Exception e)
+									{
+										
+									}
+									break;
+		case "intituleqcm":			Vector<QCM> qcm = new Vector<QCM>();
+									try{
+									Vector<String> attribute = new Vector<String>();
+									attribute.add("Intitule_id");
+									Vector<String> attributeValue = new Vector<String>();
+									attributeValue.add(value[1]);
+									qcm = db.getQCMByAttributes(attribute, attributeValue);
+									resultat = "intitule";
+									for(int i = 0; i<qcm.size(); i++)
+									{
+										resultat += ";" + qcm.get(i).getNom() + "|" + qcm.get(i).getId();
+									}
+									}catch(Exception e)
+									{
+										
+									}
+									break;
+		case "qcm" :				Vector<QCM> qcmget = new Vector<QCM>();
+									try{
+											Vector<String> attribute = new Vector<String>();
+											attribute.add("_id");
+											Vector<String> attributeValue = new Vector<String>();
+											attributeValue.add(value[1]);
+											qcmget = db.getQCMByAttributes(attribute, attributeValue);
+											resultat = "QCM;"+qcmget.get(0).getCode();									
+									}catch(Exception e)
+									{
+			
+									}
+									break;
+									
+		case "validerqcm" :			
+									boolean validation = true;
+									try{
+										db.deleteQCMCandidat(Integer.parseInt(value[1]), value[2]);
+									}catch(Exception e)
+									{
+										validation = false;
+									}
+									resultat = "validerqcm" + validation;
+									break;
+		case "qcmafaire" :
+									
+		case "creationqcm" :		QCM qcmInsert = new QCM(-1, value[1], Matiere.valueOf(value[2]), value[3], value[4]);
+									boolean insertQCM = true;
+									try{
+										db.insertQCM(qcmInsert);
+									}catch(Exception e)
+									{
+										insertQCM = false;
+									}
+									resultat = "creationqcm;"+insertQCM;
+									break;
+		case "creationcours":
+									Cours coursinsert = new Cours(-1, value[3], Matiere.valueOf(value[2]), value[1], Format.valueOf(value[4]), value[5]);
+									boolean insertCours = true;
+									try{
+										db.insertCours(coursinsert);
+									}catch(Exception e)
+									{
+										insertCours = false;
+									}
+									resultat = "creationcours;" + insertCours;
+									break;
+		}
+		
+		return resultat;
+	} 
+}

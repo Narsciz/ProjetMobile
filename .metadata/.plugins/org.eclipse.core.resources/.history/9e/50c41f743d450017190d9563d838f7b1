@@ -1,0 +1,407 @@
+package com.objis.demojdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.Vector;
+
+import CommonClasses.*;
+
+public class DataBase {
+	private static final String url = "jdbc:mysql://localhost/coursenligne";
+	private static final String login = "root";
+	private static final String pwd = "";
+	
+	public void Database(){}	
+	
+	//Permet la connection avec la base de donnée et la réception des données voulues
+	public int executeUpdate(String sql)
+	{
+		Connection cn = null;
+		Statement st = null;
+		int returnKey = -1;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			cn = DriverManager.getConnection(url, login, pwd);
+					
+			st = cn.createStatement();
+			
+			System.out.println("Execution de la requete : " + sql);
+			
+			st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+			ResultSet resultKeys = st.getGeneratedKeys();
+			returnKey = resultKeys.getInt("");
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}finally{
+			try{
+				cn.close();
+				st.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return returnKey;
+	}
+	public Vector<String> executeQueryOnIntituleTable(String sql) throws SQLException
+	{
+		ResultSet rs = null;
+		Connection cn = null;
+		Statement st = null;
+		Vector<String> res = new Vector<String>();
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			cn = DriverManager.getConnection(url, login, pwd);
+					
+			st = cn.createStatement();
+			
+			System.out.println("Execution de la requete : " + sql);
+			
+			rs = st.executeQuery(sql);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}finally{
+			try{
+				
+				while(rs.next())
+				{
+					res.add(rs.getString("Nom"));
+				}
+				cn.close();
+				st.close();
+				rs.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return res;
+	}
+	public Vector<Utilisateur> executeQueryOnUtilisateurTable(String sql) throws SQLException
+	{
+		ResultSet rs = null;
+		Connection cn = null;
+		Statement st = null;
+		Vector<Utilisateur> res = new Vector<Utilisateur>();
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			cn = DriverManager.getConnection(url, login, pwd);
+					
+			st = cn.createStatement();
+			
+			System.out.println("Execution de la requete : " + sql);
+			
+			rs = st.executeQuery(sql);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}finally{
+			try{
+				
+				while(rs.next())
+				{
+					res.add(new Utilisateur(rs.getString("_idmail"), rs.getString("Nom"), rs.getString("Prenom"), rs.getBoolean("Etudiant"), rs.getString("MotDePasse"), Annee.valueOf(rs.getString("Annee"))));
+				}
+				cn.close();
+				st.close();
+				rs.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return res;
+	}
+	public Vector<Cours> executeQueryOnCoursTable(String sql)throws SQLException
+	{
+		ResultSet rs = null;
+		Connection cn = null;
+		Statement st = null;
+		Vector<Cours> res = new Vector<Cours>();
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			cn = DriverManager.getConnection(url, login, pwd);
+					
+			st = cn.createStatement();
+			
+			System.out.println("Execution de la requete : " + sql);
+			
+			rs = st.executeQuery(sql);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}finally{
+			try{
+				
+				while(rs.next())
+				{
+					res.add(new Cours(rs.getInt("_id"), rs.getString("Intitule_id"), rs.getString("Nom"), Format.valueOf(rs.getString("Format")), rs.getString("Path")));
+				}
+				cn.close();
+				st.close();
+				rs.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return res;
+	}
+	public Vector<QCM> executeQueryOnQCMTable(String sql)throws SQLException
+	{
+		Vector<QCM> res = new Vector<QCM>();
+		
+		ResultSet rs = null;
+		Connection cn = null;
+		Statement st = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			cn = DriverManager.getConnection(url, login, pwd);
+					
+			st = cn.createStatement();
+			
+			System.out.println("Execution de la requete : " + sql);
+			
+			rs = st.executeQuery(sql);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}finally{
+			try{
+				
+				while(rs.next())
+				{
+					res.add(new QCM(rs.getInt("_id"), rs.getString("Nom"), rs.getString("Intitule_id"), rs.getString("Code")));
+				}
+				cn.close();
+				st.close();
+				rs.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return res;
+	}
+	
+	//Méthode concernant la Table Intitule
+	public void insertIntitule(String intitule, Matiere matiere, Annee annee)
+	{
+		String sql = "INSERT INTO Intitule(Matiere, Nom) Values ("
+				+"'" + matiere.name() + "', "
+				+"'" + intitule + "');";
+		this.executeUpdate(sql);
+		insertAnneeAuthorisee(intitule, annee);
+	}
+	public void deleteIntitule(String intitule)
+	{
+		String sql = "DELETE FROM Intitule WHERE Nom = '" + intitule + "';";
+		this.executeUpdate(sql);
+	}
+	public Vector<String> getAllIntitule() throws SQLException
+	{
+		String sql = "Select Nom from Intitule;";
+		return executeQueryOnIntituleTable(sql);
+	}
+	public Vector<String> getIntituleFromMatiere(Matiere matiere, Annee annee) throws SQLException
+	{
+		String sql = "Select Nom from Intitule, AnneeAuthorisee where Matiere = '" + matiere.name() + "' and Intitule.Nom = Intitule_id ";
+		if(annee != Annee.None)
+		{
+			sql += "and (Annee = '" + annee.name() + "' or ";
+			sql+="Annee = 'None');";
+		}
+		else
+		{
+			sql +=";";
+		}
+		return executeQueryOnIntituleTable(sql);
+	}
+	
+	//Méthode concernant la table Utilisaeur
+	public void insertUtilisateur(Utilisateur utilisateur)
+	{
+		String sql = "INSERT INTO Utilisateur(_idmail, Nom, Prenom, Etudiant, MotDePasse, Annee) Values ("
+				+"'" + utilisateur.getIdMail() +"', "
+				+"'" + utilisateur.getNom() + "', "
+				+"'" + utilisateur.getPrenom() + "', "
+				+utilisateur.getEtudiant() + ", "
+				+"'" + utilisateur.getMdp() + "', "
+				+"'" + utilisateur.getAnnee().name() + "');";
+		this.executeUpdate(sql);
+	}
+	public void deleteUtilisateur(Utilisateur utilisateur)
+	{
+		String sql = "DELETE FROM Utilisateur WHERE _idmail = '" + utilisateur.getIdMail() + "';";
+		this.executeUpdate(sql);
+	}
+	public Vector<Utilisateur> getUtilisateursByAttributes(Vector<String> attribute, Vector<String> attributeValue) throws SQLException
+	{
+		String sql = "Select * from Utilisateur where";
+		
+		for(int i = 0; i<attribute.size(); i++)
+		{
+			if(i>0)
+			{sql += " and ";}
+			
+			switch(attribute.get(i))
+			{
+			case "" : break;
+			case "_idmail" : sql += " _idmail = '" + attributeValue.get(i) + "'";
+				 			 break;
+			case "Nom" : sql += " Nom = '" + attributeValue.get(i) + "'";
+			 			 break;
+			case "Prenom" : sql += " Prenom = '" + attributeValue.get(i) + "'";
+							break;
+			case "Etudiant" : sql += " Etudiant = " + attributeValue.get(i);
+				 			break;
+			case "MotDePasse" : sql += " MotDePasse = '" + attributeValue.get(i) + "'";
+				 			    break;
+			case "Annee" : sql += " Annee = '" + attributeValue.get(i) + "'";
+			  	           break;
+			}
+		}
+		
+		sql += ";";
+		return executeQueryOnUtilisateurTable(sql);
+	}
+	
+	public void insertCours(Cours cours) throws SQLException
+	{
+		String sql = "INSERT INTO Cours(Intitule_id, Nom, Format, Path) Values ("
+				+"'" + cours.getIntitule() + "', "
+				+"'" + cours.getNom() + "', "
+				+"'" + cours.getFormat().name() + "', "
+				+"'" + cours.getPath() + "');";
+		this.executeUpdate(sql);		
+	}
+	public void deleteCours(Cours cours)
+	{
+		String sql = "DELETE FROM Cours WHERE _id = '" + cours.getId() + "';";
+		this.executeUpdate(sql);
+	}
+	public Vector<Cours> getCoursByAttributes(Vector<String> attribute, Vector<String> attributeValue) throws SQLException
+	{
+		String sql = "Select * from Cours";
+		
+		for(int i = 0; i<attribute.size(); i++)
+		{
+			if(i>0)
+			{sql += " and ";}
+			
+			switch(attribute.get(i))
+			{
+			case "" : break;
+			case "_id" : sql += " where _id = " + attributeValue.get(i);
+				 			 break;
+			case "Intitule_id" : sql += " where Intitule_id = '" + attributeValue.get(i) + "'";
+			 			 break;
+			case "Matiere" : sql += " where Matiere = '" + attributeValue.get(i) + "'";
+							break;
+			case "Nom" : sql += " where Nom = " + attributeValue.get(i);
+				 			break;
+			case "Format" : sql += " where Format = '" + attributeValue.get(i) + "'";
+				 			    break;
+			case "Path" : sql += " where Path = '" + attributeValue.get(i) + "'";
+			  	           break;
+			}
+		}
+		
+		return executeQueryOnCoursTable(sql);
+	}
+	
+	
+	public void insertAnneeAuthorisee(String intitule, Annee annee)
+	{
+		String sql = "INSERT INTO AnneeAuthorisee(Intitule_id, Annee) Values ("
+				+"'"+ intitule + "', "
+				+"'" + annee.name() + "');"; 
+		this.executeUpdate(sql);
+	}
+	public void deleteAnneeAuthorisee(int idCours)
+	{
+		String sql = "DELETE FROM AnneeAuthorisee WHERE Cours_id = '" + idCours + "';";
+		this.executeUpdate(sql);
+	}
+
+	public void insertQCM(QCM qcm)
+	{
+		String sql = "INSERT INTO QCM(Intitule_id, Nom, Code) Values ("
+				+ "'" + qcm.getIntitule() + "', "
+				+ "'" + qcm.getNom() + "', "
+				+ "'" + qcm.getCode() + "');";
+		int qcm_id = this.executeUpdate(sql);
+		
+		for(int i = 0; i<qcm.getDestinataires().size(); i++)
+		{
+			insertQCMCandidat(qcm_id, qcm.getDestinataires().get(i));
+		}
+	}
+	public void deleteQCM(QCM qcm)
+	{
+		String sql = "Delete From QCM where _id = " + qcm.getId() + ";";
+		executeUpdate(sql);
+		for(int i = 0; i<qcm.getDestinataires().size(); i++)
+		{
+			deleteQCMCandidat(qcm.getId(), qcm.getDestinataires().get(i));
+		}
+	}
+	public Vector<QCM> getQCMByAttributes(Vector<String> attribute, Vector<String> attributeValue) throws SQLException
+	{
+		String sql = "Select * from QCM ";
+		
+		for(int i = 0; i<attribute.size(); i++)
+		{
+			if(i>0)
+			{sql += " and ";}
+			else
+			{
+				sql += " where ";
+			}
+			
+			switch(attribute.get(i))
+			{
+			case "" : break;
+			case "_id" : sql += "  _id = " + attributeValue.get(i);
+				 			 break;
+			case "Intitule" : sql += "  Intitule_id = '" + attributeValue.get(i) + "'";
+			 			 break;
+			case "Matiere" : sql += "  Matiere_id = '" + attributeValue.get(i) + "'";
+							break;
+			case "Utilisateur" : sql += "  Utilisateur_id = " + attributeValue.get(i);
+				 			break;
+			case "Nom" : sql += "  Nom = '" + attributeValue.get(i) + "'";
+				 			    break;
+			case "Code" : sql += "  Code = '" + attributeValue.get(i) + "'";
+			  	           break;
+			}
+		}
+		return this.executeQueryOnQCMTable(sql);
+	}
+	
+	public void insertQCMCandidat(int qcm_id, String utilisateur_id)
+	{
+		String sql = "INSERT INTO QCMCandidat(QCM_id, Utilisateur_id) Values ("
+				+ qcm_id + ", "
+				+"'" + utilisateur_id + "');";
+		this.executeUpdate(sql);
+	}
+	public void deleteQCMCandidat(int qcm_id, String utilisateur_id)
+	{
+		String sql = "DELETE FROM QCMCandidat WHERE QCM_id = " + qcm_id + "AND Utilisateur_id = '"+ utilisateur_id +"';";
+		this.executeUpdate(sql);
+	}
+}
