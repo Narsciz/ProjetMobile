@@ -52,11 +52,11 @@ public class QcmAfaireActivity extends AbstractActivity {
 
             Button bouton=new Button(this);
             bouton.setText(key);
-
-            bouton.setOnClickListener(new OnClickListenerString(value){
+            String request="qcm;"+value+";"+key;
+            bouton.setOnClickListener(new OnClickListenerString(request){
                 public void onClick(View v){
-                    String request="qcmAfaire;"+intitule;
-                    new AskServerTask(QcmAfaireActivity.this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                    new AskServerTask(QcmAfaireActivity.this,intitule).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 }
             });
 

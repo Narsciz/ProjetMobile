@@ -27,7 +27,7 @@ public class Question {
             String[] splitSerial = serial.split("\\|");
             id = -1;
             laQuestion = splitSerial[0];
-            String[] lesReponses = splitSerial[1].split("#");
+            String[] lesReponses = splitSerial[1].split("&");
             for (int i = 0; i < lesReponses.length; i++) {
                 String[] splitReponses = lesReponses[i].split("@");
                 reponses.put(splitReponses[0], false);
@@ -43,7 +43,7 @@ public class Question {
             String[] splitSerial = serial.split("\\|");
             id = -1;
             laQuestion = splitSerial[0];
-            String[] lesReponses = splitSerial[1].split("#");
+            String[] lesReponses = splitSerial[1].split("&");
             for (int i = 0; i < lesReponses.length; i++) {
                 String[] splitReponses = lesReponses[i].split("@");
                 reponses.put(splitReponses[0], Boolean.valueOf(splitReponses[1]));

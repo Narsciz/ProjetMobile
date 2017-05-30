@@ -6,14 +6,14 @@ package CommonClasses;
 
 public class StaticMethods {
     static public Annee StringToAnnee(String s){
-        s.toLowerCase();
-        if (s=="l1")
+        s=s.toLowerCase();
+        if (s.equals("l1"))
             return Annee.L1;
-        if (s=="l2")
+        if (s.equals("l2"))
             return Annee.L2;
-        if (s=="l3")
+        if (s.equals("l3"))
             return Annee.L3;
-        if (s=="m1")
+        if (s.equals("m1"))
             return Annee.M1;
         return Annee.M2;
     }

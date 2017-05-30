@@ -45,6 +45,7 @@ public class IntitulesActivity extends AbstractActivity {
                 public void onClick(View v){
                     Intent i=new Intent(IntitulesActivity.this,ChoixActivity.class);
                     i.putExtra("intitule",intitule);
+                    currentIntitule=intitule;
                     startActivity(i);
                 }
             });

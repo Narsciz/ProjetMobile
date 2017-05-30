@@ -10,7 +10,6 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,10 +40,10 @@ public class DoQcmActivity extends AbstractActivity {
         Bundle b=getIntent().getExtras();
 
         final String serialQcm=b.getString("serialQcm");
-        int idQcm=b.getInt("idQcm");
+        String idQcm=b.getString("idQcm");
 
-        qcm=new QCM(b.getString("nomQcm"),serialQcm,idQcm);
-        qcmReponse=new QCM(b.getString("nomQcm"),serialQcm,idQcm,false);
+        qcm=new QCM(b.getString("nomQcm"),serialQcm,Integer.parseInt(idQcm));
+        qcmReponse=new QCM(b.getString("nomQcm"),serialQcm,Integer.parseInt(idQcm),false);
         TextView title=new TextView(this);
         title.setText(qcm.getNom()+"\n");
 
@@ -95,11 +94,12 @@ public class DoQcmActivity extends AbstractActivity {
         TextView resultat=new TextView(this);
         resultat.setText("%");
         layout.addView(resultat);
-        valider.setOnClickListener(new OnClickListenerStringViewString(serialQcm,resultat,"validerQcm;"+idQcm){
+
+        String request="validerQcm;"+idQcm+";"+session.getIdMail();
+        valider.setOnClickListener(new OnClickListenerViewString(serialQcm,resultat,request){
             public void onClick(View v){
-                //QCM reponseQcm= new QCM("reponses",string,-1);
-                textView.setText("Résultat : "+qcm.getResultat(qcmReponse)+"%");
-                new AskServerTask(DoQcmActivity.this,id).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                resultatO.setText("Résultat : "+qcm.getResultat(qcmReponse)+"%");
+                new AskServerTask(DoQcmActivity.this,requestO).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         });
 

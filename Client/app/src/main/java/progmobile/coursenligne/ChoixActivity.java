@@ -12,14 +12,14 @@ import android.widget.Toast;
 public class ChoixActivity extends AbstractActivity {
 
 
-    String intitule="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choix);
         Bundle b=getIntent().getExtras();
-        currentIntitule=b.getString("intitule");
+        //currentIntitule=b.getString("intitule");
     }
 
 
@@ -61,12 +61,12 @@ public class ChoixActivity extends AbstractActivity {
     }
 
     public void consulterCours(View view){
-        String request="intituleCours;"+intitule+";cours";
+        String request="intituleCours;"+currentIntitule+";cours";
         new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void consulterQcm(View view){
-        String request="intituleQcm;"+intitule+";qcm";
+        String request="intituleQcm;"+currentIntitule+";qcm";
         new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 }

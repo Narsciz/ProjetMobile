@@ -18,6 +18,7 @@ public class AbstractActivity extends AppCompatActivity {
     static Utilisateur session=null;
     static HashMap<String,String> qcmsAfaire=new HashMap<>();
     static String currentIntitule="";
+
     static String currentCreateQcmRequest="";
 
     @Override
@@ -48,7 +49,7 @@ public class AbstractActivity extends AppCompatActivity {
     }
 
     public void clearQcmAfaire() {
-        qcmsAfaire.clear();
+        qcmsAfaire=new HashMap<>();
 
     }
 

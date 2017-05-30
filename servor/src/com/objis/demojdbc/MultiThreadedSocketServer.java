@@ -32,10 +32,10 @@ public class MultiThreadedSocketServer {
 		String resultat="";
 		String[] value = request.split(";");
 		
-		switch(value[0]){
-		default:
-									resultat="Type de requete inconnu";
-									break;
+		String switchValue=value[0].toLowerCase();
+		
+		switch(switchValue){
+		
 			
 		case "inscription": 		
 									boolean reussi = true;
@@ -43,6 +43,7 @@ public class MultiThreadedSocketServer {
 										db.insertUtilisateur(new Utilisateur(value[1], value[4], value[3], Boolean.valueOf(value[5]), value[2], Annee.valueOf(value[6])));
 									}catch(Exception e)
 									{
+										System.out.println("Exception :"+e.getMessage());
 										reussi = false;
 									}
 									resultat = "inscription;" + reussi;	
@@ -62,14 +63,16 @@ public class MultiThreadedSocketServer {
 										if(utilisateurs.size()>0)
 										{
 											Utilisateur utilisateur = utilisateurs.get(0);
-											resultat += ";"+connecte+";" + utilisateur.getPrenom() + ";"+utilisateur.getNom()+";"+utilisateur.getEtudiant()+";"+utilisateur.getAnnee().name();
+											resultat += ";"+ utilisateur.getPrenom() + ";"+utilisateur.getNom()+";"+utilisateur.getEtudiant()+";"+utilisateur.getAnnee().name();
 										}
 										else
 										{
+											
 											connecte = false;
 										}
 									}catch(Exception e)
 									{
+										System.out.println("Exception :"+e.getMessage());
 										connecte = false;
 									}
 									if(!connecte)
@@ -81,7 +84,7 @@ public class MultiThreadedSocketServer {
 										 intitules = db.getIntituleFromMatiere(Matiere.valueOf(value[1]), Annee.valueOf(value[2]));
 									}catch(Exception e)
 									{
-										
+										System.out.println("Exception :"+e.getMessage());
 									}
 									resultat = "matiere";
 									for(int i = 0; i<intitules.size(); i++)
@@ -97,14 +100,14 @@ public class MultiThreadedSocketServer {
 										Vector<String> attributeValue = new Vector<String>();
 										attributeValue.add(value[1]);
 										cours = db.getCoursByAttributes(attribute, attributeValue);
-										resultat = "intitule";
+										resultat = "intitulecours";
 										for(int i = 0; i<cours.size(); i++)
 										{
 											resultat += ";" + cours.get(i).getNom() + "|" + cours.get(i).getFormat().name() + "|" + cours.get(i).getPath();
 										}
 									}catch(Exception e)
 									{
-										
+										System.out.println("Exception :"+e.getMessage());
 									}
 									break;
 		case "intituleqcm":			Vector<QCM> qcm = new Vector<QCM>();
@@ -114,14 +117,14 @@ public class MultiThreadedSocketServer {
 									Vector<String> attributeValue = new Vector<String>();
 									attributeValue.add(value[1]);
 									qcm = db.getQCMByAttributes(attribute, attributeValue);
-									resultat = "intitule";
+									resultat = "intituleqcm";
 									for(int i = 0; i<qcm.size(); i++)
 									{
 										resultat += ";" + qcm.get(i).getNom() + "|" + qcm.get(i).getId();
 									}
 									}catch(Exception e)
 									{
-										
+										System.out.println("Exception :"+e.getMessage());
 									}
 									break;
 		case "qcm" :				Vector<QCM> qcmget = new Vector<QCM>();
@@ -134,7 +137,7 @@ public class MultiThreadedSocketServer {
 											resultat = "qcm;"+qcmget.get(0).getCode();									
 									}catch(Exception e)
 									{
-			
+										System.out.println("Exception :"+e.getMessage());
 									}
 									break;
 									
@@ -144,9 +147,10 @@ public class MultiThreadedSocketServer {
 										db.deleteQCMCandidat(Integer.parseInt(value[1]), value[2]);
 									}catch(Exception e)
 									{
+										System.out.println("Exception :"+e.getMessage());
 										validation = false;
 									}
-									resultat = "validerqcm" + validation;
+									resultat = "validerqcm;" + validation;
 									break;
 		case "qcmafaire" :			String sql = "Select QCM._id, Nom, Intitule_id, Code from QCM, QCMCandidat where QCM._id = QCM_id and Utilisateur_id = '" + value[1] + "';";
 									try{
@@ -158,7 +162,7 @@ public class MultiThreadedSocketServer {
 									}
 									}catch(Exception e)
 									{
-										
+										System.out.println("Exception :"+e.getMessage());
 									}
 									break;
 		case "creationqcm" :		QCM qcmInsert = new QCM(-1, value[1], value[2], value[3]);
@@ -179,6 +183,7 @@ public class MultiThreadedSocketServer {
 										db.insertQCM(qcmInsert);
 									}catch(Exception e)
 									{
+										System.out.println("Exception :"+e.getMessage());
 										insertQCM = false;
 									}
 									resultat = "creationqcm;"+insertQCM;
@@ -190,6 +195,7 @@ public class MultiThreadedSocketServer {
 										db.insertCours(coursinsert);
 									}catch(Exception e)
 									{
+										System.out.println("Exception :"+e.getMessage());
 										insertCours = false;
 									}
 									resultat = "creationcours;" + insertCours;
@@ -205,9 +211,13 @@ public class MultiThreadedSocketServer {
 										}
 										}catch(Exception e)
 										{
+											System.out.println("Exception :"+e.getMessage());
 											
 										}
 										break;
+		default:
+			resultat="Type de requete inconnu";
+			break;
 		}
 		
 		return resultat;
@@ -220,7 +230,7 @@ public class MultiThreadedSocketServer {
     	
         try 
         { 
-            myServerSocket = new ServerSocket(11111); 
+            myServerSocket = new ServerSocket(1111); 
         } 
         catch(IOException ioe) 
         { 
@@ -343,10 +353,11 @@ public class MultiThreadedSocketServer {
 
                     } 
                     String response=ProcessRequest(clientCommand);
+                    System.out.println("Server response : "+response);
                     out.println(response); 
                     out.flush();
                     m_bRunThread = false;   
-                    System.out.print("Stopping client thread for client : "); 
+                    //System.out.print("Stopping client thread for client : "); 
 
                 } 
             } 
@@ -362,7 +373,7 @@ public class MultiThreadedSocketServer {
                     in.close(); 
                     out.close(); 
                     myClientSocket.close(); 
-                    System.out.println("...Stopped"); 
+                    //System.out.println("...Stopped"); 
                 } 
                 catch(IOException ioe) 
                 { 

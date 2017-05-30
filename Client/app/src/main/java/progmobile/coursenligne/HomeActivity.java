@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import java.util.Vector;
 
+import CommonClasses.Matiere;
+
 public class HomeActivity extends AbstractActivity {
 
     boolean qcmAfaire=false;
@@ -73,17 +75,17 @@ public class HomeActivity extends AbstractActivity {
     }
 
     public void consulterMath(View view) {
-        String request="matiere;mathematiques;"+getSession().getAnnee();
+        String request="matiere;"+ Matiere.Mathematiques+";"+getSession().getAnnee();
         new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void consulterInformatique(View view) {
-        String request="matiere;informatique;"+getSession().getAnnee();
+        String request="matiere;"+Matiere.Informatique+";"+getSession().getAnnee();
         new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void consulterBio(View view) {
-        String request="matiere;biologie;"+getSession().getAnnee();
+        String request="matiere;"+Matiere.Biologie+";"+getSession().getAnnee();
         new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
@@ -93,7 +95,7 @@ public class HomeActivity extends AbstractActivity {
     }
 
     public void consulterPhysique(View view) {
-        String request="matiere;physique;"+getSession().getAnnee();
+        String request="matiere;"+Matiere.Physique+";"+getSession().getAnnee();
         new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 }

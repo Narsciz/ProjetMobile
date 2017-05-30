@@ -43,7 +43,9 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
 
         String[] r= result.split(";");
 
-        switch(r[0]){
+        String switchValue=r[0].toLowerCase();
+
+        switch(switchValue){
             case "inscription":
                 inscription(r);
                 break;
@@ -53,12 +55,11 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
             case "matiere":
                 matiere(r);
                 break;
-            case "intituleCours":
+            case "intitulecours":
 
                 intituleCours(r);
                 break;
-            case "intituleQcm":
-
+            case "intituleqcm":
                 intituleQcm(r);
                 break;
             case "qcm":
@@ -67,18 +68,33 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
             case "valider":
                 valider(r);
                 break;
-            case "qcmAfaire":
+            case "qcmafaire":
                 qcmAfaire(r);
                 break;
-            case "creationQcm":
+            case "creationqcm":
                 creationQcm(r);
                 break;
-            case "creationCours":
+            case "creationcours":
                 creationCours(r);
             case "getusers":
                 getUsers(r);
                 break;
+            case "validerqcm":
+                validerQcm(r);
+                break;
             default:
+                Toast.makeText(context, "Type requete recu invalide", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void validerQcm(String[] r) {
+        try{
+            if (r[1].equals("true"))
+                Toast.makeText(context, "Qcm a été correctement validé", Toast.LENGTH_SHORT).show();
+            else Toast.makeText(context, "Validation qcm refusée", Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            Toast.makeText(context, "Exception : "+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
