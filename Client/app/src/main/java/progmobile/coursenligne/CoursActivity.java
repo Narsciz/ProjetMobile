@@ -3,6 +3,7 @@ package progmobile.coursenligne;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,7 +63,7 @@ public class CoursActivity extends AbstractActivity {
                     }
                 });
             }
-            
+
 
             layout.addView(boutons.get(i));
         }
@@ -87,7 +88,9 @@ public class CoursActivity extends AbstractActivity {
 
         switch(item.getItemId()){
             case R.id.item_home:
-                startActivity(new Intent(this,HomeActivity.class));
+                if (session.getEtudiant())
+                    new AskServerTask(this,"qcmAfaire;"+session.getIdMail()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                else startActivity(new Intent(this,HomeActivity.class));
                 break;
             case R.id.item_cours:
                 startActivity(new Intent(this,CreateCoursActivity.class));

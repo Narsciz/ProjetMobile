@@ -1,6 +1,7 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import java.util.Map;
 import java.util.Vector;
 
 public class QcmAfaireActivity extends AbstractActivity {
@@ -24,8 +26,8 @@ public class QcmAfaireActivity extends AbstractActivity {
         layout.setOrientation(LinearLayout.VERTICAL);
         scroll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        Vector<Button> boutons=new Vector<>();
-        Bundle b=this.getIntent().getExtras();
+        //Vector<Button> boutons=new Vector<>();
+        /*Bundle b=this.getIntent().getExtras();
         final String[] listeNomQcm=b.getStringArray("listeNomQcm");
         final String[] listeIdQcm=b.getStringArray("listeIdQcm");
 
@@ -43,7 +45,23 @@ public class QcmAfaireActivity extends AbstractActivity {
 
             layout.addView(boutons.get(i));
         }
+*/
+        for (Map.Entry<String, String> entry : qcmsAfaire.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
 
+            Button bouton=new Button(this);
+            bouton.setText(key);
+
+            bouton.setOnClickListener(new OnClickListenerString(value){
+                public void onClick(View v){
+                    String request="qcmAfaire;"+intitule;
+                    new AskServerTask(QcmAfaireActivity.this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                }
+            });
+
+            layout.addView(bouton);
+        }
         scroll.addView(layout);
         setContentView(scroll);
     }
@@ -62,7 +80,9 @@ public class QcmAfaireActivity extends AbstractActivity {
 
         switch(item.getItemId()){
             case R.id.item_home:
-                startActivity(new Intent(this,HomeActivity.class));
+                if (session.getEtudiant())
+                    new AskServerTask(this,"qcmAfaire;"+session.getIdMail()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                else startActivity(new Intent(this,HomeActivity.class));
                 break;
             case R.id.item_deconnexion:
                 startActivity(new Intent(this,DoQcmActivity.class));

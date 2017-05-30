@@ -1,9 +1,11 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class TestCommunicationServer extends AbstractActivity {
 
@@ -21,7 +23,7 @@ public class TestCommunicationServer extends AbstractActivity {
         /*askServer =new AskServer();
         askServerTask =new AskServerTask(this);
         askServerTask.execute(s);*/
-        new AskServerTask(this,s).execute();
+        new AskServerTask(this,s).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
     public void sendToAuthentification(View view){
         startActivity(new Intent(this,AuthentificationActivity.class));

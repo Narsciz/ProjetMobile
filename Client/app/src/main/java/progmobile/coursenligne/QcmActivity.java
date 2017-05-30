@@ -1,6 +1,7 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,11 +33,12 @@ public class QcmActivity extends AbstractActivity {
         for (int i=0;i<listeNomQcm.length;i++) {
             boutons.add(new Button(this));
             boutons.get(i).setText(listeNomQcm[i]);
+            String request="qcm;"+listeIdQcm[i]+";"+listeNomQcm[i];
 
-            boutons.get(i).setOnClickListener(new OnClickListenerString(listeIdQcm[i]){
+            boutons.get(i).setOnClickListener(new OnClickListenerString(request){
                 public void onClick(View v){
-                    String request="qcm;"+intitule;
-                    new AskServerTask(QcmActivity.this,request).execute();
+                    //String request="qcm;"+intitule;
+                    new AskServerTask(QcmActivity.this,intitule).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 }
             });
 
@@ -62,10 +64,16 @@ public class QcmActivity extends AbstractActivity {
 
         switch(item.getItemId()){
             case R.id.item_home:
-                startActivity(new Intent(this,HomeActivity.class));
+                if (session.getEtudiant())
+                    new AskServerTask(this,"qcmAfaire;"+session.getIdMail()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                else startActivity(new Intent(this,HomeActivity.class));
                 break;
             case R.id.item_qcm:
-                startActivity(new Intent(this,CreateQcmActivity.class));
+                Intent intent=new Intent(this,CreateQcmActivity.class);
+                Bundle b=getIntent().getExtras();
+                String intitule=b.getString("intitule");
+                intent.putExtra("intitule",intitule);
+                startActivity(intent);
                 break;
             case R.id.item_deconnexion:
                 startActivity(new Intent(this,AuthentificationActivity.class));

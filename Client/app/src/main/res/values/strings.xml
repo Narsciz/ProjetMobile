@@ -26,12 +26,26 @@
     <string name="chimie">Chimie</string>
     <string name="physique">Physique</string>
     <string name="qcm_a_faire">QCM</string>
+    <string name="nom_cours">Nom cours</string>
+    <string name="ajouter_cours_hint">Lien (youtube ou page pdf)</string>
     <string-array name="choix_annee">
         <item>L1</item>
         <item>L2</item>
         <item>L3</item>
         <item>M1</item>
         <item>M2</item>
+    </string-array>
+    <string-array name="choix_nb_reponse">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
     </string-array>
     <string-array name="array_vide">
     </string-array>

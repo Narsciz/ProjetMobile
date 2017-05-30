@@ -3,14 +3,19 @@ package progmobile.coursenligne;
 /**
  * Created by Millenium on 26/05/2017.
  */
+import android.util.Log;
+
 import java.net.*;
 import java.io.*;
+import java.security.spec.ECField;
+
+import static android.content.ContentValues.TAG;
 
 public class AskServer
 {
 
     String serverIP="192.168.1.15";
-
+    //String serverIP="10.0.0.1";
     int port=1111;
 
 
@@ -20,27 +25,34 @@ public class AskServer
 
 
     public String ask(String request) {
+
+
         Socket s = null;
         String response="";
 
         // Create the socket connection to the MultiThreadedSocketServer port 11111
         try {
             s = new Socket(serverIP, port);
+
         }
         catch(UnknownHostException uhe) {
             // Server Host unreachable
-            System.out.println("Unknown Host :" + serverIP);
             s = null;
+
             return "Unknown Host :" + serverIP;
 
         }
         catch(IOException ioe) {
             // Cannot connect to port on given server host
-            System.out.println("Cant connect to server at "+port+". Make sure it is running.");
+
             s = null;
-            return "Cant connect to server at "+port+". Make sure it is running.";
+            return ioe.getMessage();
 
         }
+        catch(Exception e){
+            return e.getMessage();
+        }
+
 
         if(s == null)
             System.exit(-1);
@@ -86,3 +98,4 @@ public class AskServer
         return response;
     }
 }
+

@@ -1,15 +1,14 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-
-import CommonClasses.Annee;
-import CommonClasses.Utilisateur;
+import android.widget.Toast;
 
 
 public class AuthentificationActivity extends AbstractActivity {
@@ -28,10 +27,14 @@ public class AuthentificationActivity extends AbstractActivity {
         EditText emailEditText=(EditText)findViewById(R.id.edit_email);
         EditText mdpEditText=(EditText)findViewById(R.id.edit_mdp);
         String email=emailEditText.getText().toString();
+        if (email.isEmpty())
+            email=" ";
         String mdp=mdpEditText.getText().toString();
-        String request="authentification;"+email+";"+"mdp";
+        if (mdp.isEmpty())
+            mdp=" ";
+        String request="authentification;"+email+";"+mdp;
 
-        new AskServerTask(this,request).execute();
+        new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
 

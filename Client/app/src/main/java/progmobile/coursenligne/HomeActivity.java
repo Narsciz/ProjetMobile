@@ -1,6 +1,7 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,47 +18,30 @@ import java.util.Vector;
 
 public class HomeActivity extends AbstractActivity {
 
+    boolean qcmAfaire=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //new AskServerTask(this,"qcmAfaire;"+session.getIdMail()).execute();
+
+
+        if (qcmsAfaire.isEmpty())
+            qcmAfaire=false;
+        else qcmAfaire=true;
+
+        invalidateOptionsMenu();
+
         setContentView(R.layout.activity_home);
-
-
-        /*ScrollView scroll=new ScrollView(this);
-        LinearLayout layout=new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        scroll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-        Vector<Button> boutons=new Vector<>();
-        //récup liste matières utilisateur
-
-
-        for (int i=0;i<100;i++) {
-            boutons.add(new Button(this));
-            boutons.get(i).setText("matière"+i);
-
-            boutons.get(i).setOnClickListener(new View.OnClickListener(){
-                public void onClick(View v){
-                    startActivity(new Intent(HomeActivity.this,ChoixActivity.class));
-                }
-            });
-
-            layout.addView(boutons.get(i));
-        }
-
-        scroll.addView(layout);
-        setContentView(scroll);
-        */
-
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.base_menu,menu);
-        //if (/*eleve*/ true && true /*qcm à faire != 0*/ )
+        if (session.getEtudiant() && qcmAfaire)
             inflater.inflate(R.menu.qcm_eleve_menu,menu);
+        inflater.inflate(R.menu.base_menu,menu);
+
 
         return true;
     }
@@ -67,14 +51,17 @@ public class HomeActivity extends AbstractActivity {
 
         switch(item.getItemId()){
             case R.id.item_home:
-                startActivity(new Intent(this,HomeActivity.class));
+                if (session.getEtudiant())
+                    new AskServerTask(this,"qcmAfaire;"+session.getIdMail()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                else startActivity(new Intent(this,HomeActivity.class));
                 break;
             case R.id.item_deconnexion:
                 startActivity(new Intent(this,AuthentificationActivity.class));
                 break;
             case R.id.item_qcm_a_faire:
-                String request="qcmAfaire;"+AbstractActivity.getSession().getIdentifiant();
-                new AskServerTask(this,request).execute();
+                /*String request="qcmAfaire;"+AbstractActivity.getSession().getIdMail();
+                new AskServerTask(this,request).execute();*/
+                startActivity(new Intent(this,QcmAfaireActivity.class));
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -87,26 +74,26 @@ public class HomeActivity extends AbstractActivity {
 
     public void consulterMath(View view) {
         String request="matiere;mathematiques;"+getSession().getAnnee();
-        new AskServerTask(this,request).execute();
+        new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void consulterInformatique(View view) {
         String request="matiere;informatique;"+getSession().getAnnee();
-        new AskServerTask(this,request).execute();
+        new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void consulterBio(View view) {
         String request="matiere;biologie;"+getSession().getAnnee();
-        new AskServerTask(this,request).execute();
+        new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void consulterChimie(View view) {
         String request="matiere;chimie;"+getSession().getAnnee();
-        new AskServerTask(this,request).execute();
+        new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void consulterPhysique(View view) {
         String request="matiere;physique;"+getSession().getAnnee();
-        new AskServerTask(this,request).execute();
+        new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 }

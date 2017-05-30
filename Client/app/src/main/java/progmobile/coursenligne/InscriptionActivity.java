@@ -1,6 +1,7 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -60,7 +61,7 @@ public class InscriptionActivity extends AbstractActivity {
 
 
         String request="inscription;"+email+";"+mdp+";"+prenom+";"+nom+";"+type+";"+annee;
-        new AskServerTask(this,request).execute();
+        new AskServerTask(this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 
 
