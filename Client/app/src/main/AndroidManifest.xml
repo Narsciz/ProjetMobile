@@ -33,7 +33,8 @@
         </activity>
         <activity android:name=".IntitulesActivity" />
         <activity android:name=".QcmAfaireActivity" />
-        <activity android:name=".DoQcmActivity"></activity>
+        <activity android:name=".DoQcmActivity" />
+        <activity android:name=".ChooseQcmUserActivity"></activity>
     </application>
 
 </manifest>

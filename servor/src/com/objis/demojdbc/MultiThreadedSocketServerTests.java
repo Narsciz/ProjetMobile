@@ -46,11 +46,14 @@ public class MultiThreadedSocketServerTests {
 			resultat="intituleQcm;Qcm1|idQcm1;Qcm2|idQcm2";
 			break;
 		case "qcm":
-			resultat="qcm;Qu'elle est la couleur du cheval blanc d'henry IV ?|blanc@false#noir@true#rose@false;"
+			resultat="qcm;Qu'elle est la couleur du cheval blanc d'henry IV ?|blanc@false#noir@true#rose@false$"
 					+ "Combien font 2+2 ?|4@true#3+1@true#5-2@false";
 			break;
 		case "qcmAfaire":
 			resultat="qcmAfaire;Qcm à faire 1|idQcmAfaire1;Qcm à faire 2|idQcmAfaire2";
+			break;
+		case "getusers":
+			resultat="getusers;id1|nom1|prenom1;id2|nom2|prenom2";
 			break;
 		default:
 			resultat="le serveur n'a pas pu traiter votre requete";
@@ -185,10 +188,11 @@ public class MultiThreadedSocketServerTests {
 
                     } 
                     String response=ProcessRequest(clientCommand);
+                    System.out.println("server response :"+response);
                     out.println(response); 
                     out.flush();
                     m_bRunThread = false;   
-                    System.out.print("Stopping client thread for client : "); 
+                    //System.out.print("Stopping client thread for client : "); 
 
                 } 
             } 

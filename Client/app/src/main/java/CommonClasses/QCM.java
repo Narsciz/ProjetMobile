@@ -1,6 +1,10 @@
 package CommonClasses;
 
+import android.util.Log;
+
 import java.util.Vector;
+
+import static android.content.ContentValues.TAG;
 
 
 public class QCM {
@@ -37,7 +41,9 @@ public class QCM {
             this.createur = null;
             this.destinataires = null;
             questions = new Vector<>();
-            String[] questionsSplit = serialQcm.split(";");
+            String[] questionsSplit = serialQcm.split("\\$");
+            String test=questionsSplit[0];
+            int nb=questionsSplit.length;
             for (int i = 0; i < questionsSplit.length; i++)
                 questions.add(new Question(questionsSplit[i]));
         }
@@ -54,7 +60,7 @@ public class QCM {
             this.createur = null;
             this.destinataires = null;
             questions = new Vector<>();
-            String[] questionsSplit = serialQcm.split(";");
+            String[] questionsSplit = serialQcm.split("\\$");
             for (int i = 0; i < questionsSplit.length; i++)
                 questions.add(new Question(questionsSplit[i],b));
         }
@@ -67,8 +73,9 @@ public class QCM {
     public float getResultat(QCM res){
         int nbQuestion=questions.size();
         int nbQuestionJuste=0;
-
+        int resSize=res.getQuestions().size();
         for (int i=0;i<questions.size();i++){
+
             if (res.getQuestions().get(i).isCorrect(questions.get(i)))
                 nbQuestionJuste++;
 

@@ -1,9 +1,9 @@
 package progmobile.coursenligne;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,19 +23,18 @@ public class CreateQcmActivity extends AbstractActivity {
 
     QCM qcm=new QCM();
     String serial="";
+    QcmLayout qcmLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
+        qcmLayout=new QcmLayout(this);
         EditText titreQcm=new EditText(this);
         titreQcm.setHint("Titre QCM");
 
         LinearLayout layout=new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
 
-        final LinearLayout qcmLayout=new LinearLayout(this);
         qcmLayout.setOrientation(LinearLayout.VERTICAL);
 
         LinearLayout buttonsLayout=new LinearLayout(this);
@@ -48,88 +47,91 @@ public class CreateQcmActivity extends AbstractActivity {
         spin.setAdapter(adapter);
 
 
-        Vector<Vector<LinearLayout>> LLreponses=new Vector<>();
-        final Vector<LinearLayout> LLQreponses=new Vector<>();
-
-
-
-
         Button ajouterQuestion=new Button(this);
         ajouterQuestion.setText("+ question");
-        ajouterQuestion.setOnClickListener(new OnClickListenerLLayoutSpinnerVectorVector(qcmLayout,spin,LLreponses,LLQreponses){
-            public void onClick(View v){
 
-                LinearLayout questionReponse=new LinearLayout(CreateQcmActivity.this);
-                questionReponse.setOrientation(LinearLayout.VERTICAL);
-                Vector<LinearLayout> LLreponse=new Vector<>();
-                LLQreponsesO.add(questionReponse);
-                qcmLayoutO.addView(questionReponse);
+        ajouterQuestion.setOnClickListener(new OnClickListenerLLayoutSpinner(qcmLayout,spin){
+            public void onClick(View v){
 
                 EditText question=new EditText(CreateQcmActivity.this);
                 question.setHint("Question");
                 question.setInputType(TYPE_TEXT_VARIATION_SHORT_MESSAGE);
 
-                questionReponse.addView(question);
-
-                LinearLayout reponses=new LinearLayout(CreateQcmActivity.this);
+                ReponsesLayout reponses=new ReponsesLayout(CreateQcmActivity.this);
                 reponses.setOrientation(LinearLayout.VERTICAL);
+
+                QReponseLayout questionReponse=new QReponseLayout(CreateQcmActivity.this,question,reponses);
+                questionReponse.setOrientation(LinearLayout.VERTICAL);
+
+                qcmLayoutO.addQReponse(questionReponse);
+
+
+                questionReponse.addView(question);
 
 
                 int nbReponse=Integer.parseInt(spinnerO.getSelectedItem().toString());
                 for (int i=0;i<nbReponse;i++){
-                    LinearLayout reponse=new LinearLayout(CreateQcmActivity.this);
-                    reponse.setOrientation(LinearLayout.HORIZONTAL);
+
                     CheckBox checkBox=new CheckBox(CreateQcmActivity.this);
                     EditText reponseString=new EditText(CreateQcmActivity.this);
                     reponseString.setHint("réponse "+i);
                     reponseString.setInputType(TYPE_TEXT_VARIATION_SHORT_MESSAGE);
+
+                    CheckBoxReponseLayout reponse=new CheckBoxReponseLayout(CreateQcmActivity.this,checkBox,reponseString);
+                    reponse.setOrientation(LinearLayout.HORIZONTAL);
                     reponse.addView(checkBox);
                     reponse.addView(reponseString);
-                    reponses.addView(reponse);
-                    LLreponse.add(reponse);
+                    reponses.addCheckBoxReponse(reponse);
+
                 }
-                LLreponsesO.add(LLreponse);
+
                 qcmLayoutO.addView(reponses);
 
             }
         });
 
-
-
         Button valider=new Button(this);
         valider.setText("Enregistrer");
-        valider.setOnClickListener(new OnClickListenerLLayoutVectorVectorStringString(qcmLayout,LLreponses,LLQreponses,titreQcm, currentIntitule){
-            public void onClick(View v){
-                String request = "creationQcm;"+titreQcmO.getText().toString()+";"+ intituleQcmO +";";
-                try {
-                    int nbQR = LLQreponsesO.size();
-                    for (int i = 0; i < nbQR; i++) {
-                        LinearLayout currentQR = LLQreponsesO.get(i);
-                        EditText question = (EditText) currentQR.getChildAt(0);
-                        String questionString = question.getText().toString();
-                        request += questionString + '|';
 
-                        LinearLayout currentReponses = LLQreponsesO.get(i);
-                        int nbReponse = currentReponses.getChildCount();
+        valider.setOnClickListener(new onClickListenerQcmLayoutString(qcmLayout,titreQcm){
+            public void onClick(View v){
+                currentCreateQcmRequest = "creationQcm;"+titreQcmO.getText().toString()+";"+ currentIntitule +";";
+                try {
+                    int nbQR = qcmLayout.size();
+                    for (int i = 0; i < nbQR; i++) {
+                        QReponseLayout currentQR = qcmLayout.get(i);
+                        EditText question = currentQR.getQuestion();
+                        String questionString = question.getText().toString();
+                        currentCreateQcmRequest += questionString + '|';
+
+                        ReponsesLayout currentReponses = currentQR.getReponses();
+                        int nbReponse = currentReponses.size();
                         for (int j = 0; j < nbReponse; j++) {
-                            LinearLayout reponseLL =  (LinearLayout)currentReponses.getChildAt(j);
-                            CheckBox checkBox = (CheckBox) reponseLL.getChildAt(0);
-                            String bool = "";
+                            CheckBoxReponseLayout checkBoxReponse =  currentReponses.get(j);
+                            CheckBox checkBox = checkBoxReponse.getCheckBox();
+                            String bool;
                             if (checkBox.isChecked())
                                 bool = "true";
                             else bool = "false";
 
-                            EditText reponseE = (EditText) reponseLL.getChildAt(1);
+                            EditText reponseE = checkBoxReponse.getReponse();
                             String reponseString = reponseE.getText().toString();
-                            request += reponseString + '@' + bool;
+                            currentCreateQcmRequest += reponseString + '@' + bool;
+                            if (j!=nbReponse-1)
+                                currentCreateQcmRequest+='&';
                         }
+                        if (i!=nbQR-1)
+                            currentCreateQcmRequest+='$';
                     }
-                    Toast.makeText(CreateQcmActivity.this, request, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(CreateQcmActivity.this, currentCreateQcmRequest, Toast.LENGTH_LONG).show();
+                    currentCreateQcmRequest+=";";
+                    new AskServerTask(CreateQcmActivity.this,"getusers;"+currentIntitule).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    //new AskServerTask(CreateQcmActivity.this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 }
                 catch(Exception e){
                     Toast.makeText(CreateQcmActivity.this, "Exception :"+e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-                new AskServerTask(CreateQcmActivity.this,request).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
             }
         });
 
@@ -139,14 +141,10 @@ public class CreateQcmActivity extends AbstractActivity {
         buttonsLayout.addView(ajouterQuestion);
         buttonsLayout.addView(spin);
 
-
-
         layout.addView(titreQcm);
         layout.addView(qcmLayout);
         layout.addView(buttonsLayout);
         layout.addView(valider);
-
-
 
         setContentView(scroll);
     }

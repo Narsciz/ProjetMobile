@@ -31,9 +31,7 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
     }
     @Override
     protected String doInBackground(Void... params) {
-        /*AskServer c=new AskServer(params[0]);
-        c.run();
-        return c.getResponse();*/
+
 
         return new AskServer().ask(question);
     }
@@ -77,9 +75,19 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
                 break;
             case "creationCours":
                 creationCours(r);
+            case "getusers":
+                getUsers(r);
                 break;
             default:
         }
+    }
+
+    private void getUsers(String[] r) {
+        Intent intent=new Intent(context,ChooseQcmUserActivity.class);
+        Bundle b=new Bundle();
+        b.putStringArray("users",r);
+        intent.putExtras(b);
+        context.startActivity(intent);
     }
 
     private void creationQcm(String[] r) {
@@ -131,7 +139,6 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
             context.setSession(new Utilisateur(email,nom,prenom,type,mdp,annee));
 
             new AskServerTask(context,"qcmAfaire;"+context.session.getIdMail()).execute();
-            //context.startActivity(new Intent(context, HomeActivity.class));
         }
         catch (Exception e){
             Toast.makeText(context,"authentification exception : "+e.getMessage(),Toast.LENGTH_LONG).show();

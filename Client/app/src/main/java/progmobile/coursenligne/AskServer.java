@@ -15,7 +15,7 @@ public class AskServer
 {
 
     String serverIP="192.168.1.15";
-    //String serverIP="10.0.0.1";
+    //String serverIP="169.254.238.178";
     int port=1111;
 
 

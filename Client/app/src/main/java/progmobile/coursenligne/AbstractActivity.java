@@ -16,14 +16,13 @@ public class AbstractActivity extends AppCompatActivity {
 
 
     static Utilisateur session=null;
-    AskServer askServer;
     static HashMap<String,String> qcmsAfaire=new HashMap<>();
     static String currentIntitule="";
+    static String currentCreateQcmRequest="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_abstract);
     }
 
     @Override
@@ -53,7 +52,4 @@ public class AbstractActivity extends AppCompatActivity {
 
     }
 
-    static public HashMap<String,String>  getQcmsAfaire() {
-        return qcmsAfaire;
-    }
 }

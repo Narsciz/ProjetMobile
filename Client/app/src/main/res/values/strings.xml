@@ -47,8 +47,7 @@
         <item>9</item>
         <item>10</item>
     </string-array>
-    <string-array name="array_vide">
-    </string-array>
+    <string-array name="array_vide"></string-array>
 
 
 </resources>

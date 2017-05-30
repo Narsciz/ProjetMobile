@@ -24,6 +24,7 @@ public class DoQcmActivity extends AbstractActivity {
 
     QCM qcm=new QCM();
     QCM qcmReponse=new QCM();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,7 @@ public class DoQcmActivity extends AbstractActivity {
 
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        Toast.makeText(DoQcmActivity.this,qcmReponse.toString(),Toast.LENGTH_LONG).show();
+                        //Toast.makeText(DoQcmActivity.this,qcmReponse.toString(),Toast.LENGTH_LONG).show();
                         qcm.getQuestions().get(index).getReponses().put(key,isChecked);
                     }
                 });

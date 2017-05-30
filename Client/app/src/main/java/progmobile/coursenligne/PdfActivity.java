@@ -16,6 +16,7 @@ public class PdfActivity extends AbstractActivity {
 
         w.getSettings().setJavaScriptEnabled(true);
         w.loadUrl("https://docs.google.com/gview?embedded=true&url="+b.getString("pathCours"));
+
         setContentView(w);
 
     }
