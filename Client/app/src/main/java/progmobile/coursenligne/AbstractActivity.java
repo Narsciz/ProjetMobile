@@ -49,7 +49,7 @@ public class AbstractActivity extends AppCompatActivity {
     }
 
     public void clearQcmAfaire() {
-        qcmsAfaire=new HashMap<>();
+        qcmsAfaire.clear();
 
     }
 

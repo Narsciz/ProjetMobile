@@ -50,10 +50,10 @@ public class InscriptionActivity extends AbstractActivity {
         }
 
         if (prof.isChecked())
-            type="true";
+            type="false";
         else{
             annee=spin.getSelectedItem().toString();
-            type="false";
+            type="true";
         }
 
 

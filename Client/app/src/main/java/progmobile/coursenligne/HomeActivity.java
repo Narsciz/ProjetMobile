@@ -20,16 +20,12 @@ import CommonClasses.Matiere;
 
 public class HomeActivity extends AbstractActivity {
 
-    boolean qcmAfaire=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //new AskServerTask(this,"qcmAfaire;"+session.getIdMail()).execute();
 
 
-        if (qcmsAfaire.isEmpty())
-            qcmAfaire=false;
-        else qcmAfaire=true;
 
         invalidateOptionsMenu();
 
@@ -40,7 +36,7 @@ public class HomeActivity extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
-        if (session.getEtudiant() && qcmAfaire)
+        if (session.getEtudiant() && !qcmsAfaire.isEmpty())
             inflater.inflate(R.menu.qcm_eleve_menu,menu);
         inflater.inflate(R.menu.base_menu,menu);
 

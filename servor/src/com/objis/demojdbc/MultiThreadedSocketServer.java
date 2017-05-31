@@ -326,7 +326,7 @@ public class MultiThreadedSocketServer {
             PrintWriter out = null; 
 
             // Print out details of this connection 
-            System.out.println("Accepted Client Address - " + myClientSocket.getInetAddress().getHostName()); 
+            //System.out.println("Accepted Client Address - " + myClientSocket.getInetAddress().getHostName()); 
 
             try 
             {                                
