@@ -12,13 +12,14 @@ import CommonClasses.StaticMethods;
 import CommonClasses.Utilisateur;
 
 /**
- * Created by Millenium on 27/05/2017.
+ * AskServerTask appelle le client dans un thread et met ensuite à jour dans postExecute()
+ * l'interface du main thread
  */
 
 public class AskServerTask extends AsyncTask<Void,Void,String> {
 
-    private AbstractActivity context;
-    private String question;
+    private AbstractActivity context;//activité courante
+    private String question;//question posé par le client
 
     AskServerTask(AbstractActivity c,String r){
         context=c;
@@ -27,12 +28,11 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
 
     @Override
     protected void onPreExecute(){
-        //Toast.makeText(context,"toast",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context,"test",Toast.LENGTH_SHORT).show();
     }
+
     @Override
     protected String doInBackground(Void... params) {
-
-
         return new AskServer().ask(question);
     }
 
@@ -76,14 +76,18 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
                 break;
             case "creationcours":
                 creationCours(r);
+                break;
             case "getusers":
                 getUsers(r);
                 break;
             case "validerqcm":
                 validerQcm(r);
                 break;
+            case "echo":
+                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+                break;
             default:
-                Toast.makeText(context, "Type requete recu invalide", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Erreur :"+result, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -108,7 +112,7 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
 
     private void creationQcm(String[] r) {
         try{
-            if (r[1]=="true")
+            if (r[1].equals("true"))
                 Toast.makeText(context, "Le qcm a été correctement ajouté", Toast.LENGTH_SHORT).show();
             else Toast.makeText(context, "Le qcm a été refusé par le serveur", Toast.LENGTH_SHORT).show();
         }
@@ -119,7 +123,7 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
 
     private void creationCours(String[] r) {
         try{
-            if (r[1]=="true")
+            if (r[1].equals("true"))
                 Toast.makeText(context, "Le cours a été correctement ajouté", Toast.LENGTH_SHORT).show();
             else Toast.makeText(context, "Le cours a été refusé par le serveur", Toast.LENGTH_SHORT).show();
         }
@@ -136,19 +140,24 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
                 Toast.makeText(context,"La serveur a refusé l'inscription", Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
-            Toast.makeText(context,"insciption exception : "+e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"inscription exception : "+e.getMessage(),Toast.LENGTH_LONG).show();
         }
 
     }
 
+
     private void authentification(String[] r){
 
         try {
+            if (r[1].equals("false")){
+                Toast.makeText(context, "L'authentification a été refusé par le serveur", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             String[] q = question.split(";");
             String email = q[1];
-
-            String mdp=q[2];
             String prenom = r[1];
+            String mdp=q[2];
             String nom = r[2];
             boolean type = Boolean.valueOf(r[3]);
             Annee annee = StaticMethods.StringToAnnee(r[4]);
@@ -159,7 +168,6 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
         catch (Exception e){
             Toast.makeText(context,"authentification exception : "+e.getMessage(),Toast.LENGTH_LONG).show();
         }
-
     }
 
     private void matiere(String[] r) {
@@ -172,7 +180,6 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
     }
 
     private void intituleCours(String[] r){
-
         try {
             Bundle b = new Bundle();
             Intent intent;
@@ -186,7 +193,6 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
                 listeNomCours[i - 1] = currentCours[0];
                 listeTypeCours[i - 1] = currentCours[1];
                 listePathCours[i - 1] = currentCours[2];
-
             }
             b.putStringArray("listeNomCours", listeNomCours);
             b.putStringArray("listeTypeCours", listeTypeCours);
@@ -211,13 +217,12 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
             String[] listeIdQcm = new String[r.length - 1];
 
             for (int i = 1; i < r.length; i++) {
-
                 String[] currentQcm = r[i].split("\\|");
-
 
                 listeNomQcm[i - 1] = currentQcm[0];
                 listeIdQcm[i - 1] = currentQcm[1];
             }
+
             b.putStringArray("listeNomQcm", listeNomQcm);
             b.putStringArray("listeIdQcm", listeIdQcm);
             b.putString("intitule",question.split(";")[1]);
@@ -249,7 +254,7 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
 
     private void valider(String[] r){
         try{
-            if (r[1]=="true")
+            if (r[1].equals("true"))
                 Toast.makeText(context,"Le qcm a été validé",Toast.LENGTH_SHORT).show();
 
             else
@@ -260,36 +265,9 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
         }
     }
 
+
     private void qcmAfaire(String[] r) {
-        /*try {
-            Bundle b = new Bundle();
-            Intent intent;
-            intent = new Intent(context, QcmAfaireActivity.class);
-            String[] listeNomQcm = new String[r.length - 1];
-            String[] listeIdQcm = new String[r.length - 1];
-
-            for (int i = 1; i < r.length; i++) {
-
-                String[] currentQcm = r[i].split("\\|");
-
-
-                listeNomQcm[i - 1] = currentQcm[0];
-                listeIdQcm[i - 1] = currentQcm[1];
-            }
-            b.putStringArray("listeNomQcm", listeNomQcm);
-            b.putStringArray("listeIdQcm", listeIdQcm);
-            intent.putExtras(b);
-            context.startActivity(intent);
-        }
-        catch (Exception e){
-            Toast.makeText(context,"qcmAfaire exception : "+e.getMessage(),Toast.LENGTH_LONG).show();
-        }
-
-
-    }*/
         try{
-
-
             context.clearQcmAfaire();
             for (int i = 1; i < r.length; i++) {
                 String[] currentQcm = r[i].split("\\|");
@@ -303,7 +281,5 @@ public class AskServerTask extends AsyncTask<Void,Void,String> {
         catch(Exception e){
             Toast.makeText(context,"qcmAfaire exception : "+e.getMessage(),Toast.LENGTH_LONG).show();
         }
-
     }
-
 }

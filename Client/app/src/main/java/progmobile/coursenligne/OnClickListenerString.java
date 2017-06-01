@@ -4,7 +4,7 @@ package progmobile.coursenligne;
 import android.view.View;
 
 /**
- * Created by Millenium on 27/05/2017.
+ * Sert juste à passer en paramètre des objets
  */
 
 public class OnClickListenerString implements View.OnClickListener {

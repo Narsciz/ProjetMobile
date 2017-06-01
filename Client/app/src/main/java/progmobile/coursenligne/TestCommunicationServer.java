@@ -1,16 +1,16 @@
 package progmobile.coursenligne;
 
 import android.content.Intent;
+import android.database.CursorJoiner;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class TestCommunicationServer extends AbstractActivity {
 
-    Thread t;
-    AskServerTask askServerTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,12 +20,19 @@ public class TestCommunicationServer extends AbstractActivity {
     public void sendMessage(View view) throws InterruptedException {
         EditText e=(EditText)findViewById(R.id.editText);
         String s=e.getText().toString();
-        /*askServer =new AskServer();
-        askServerTask =new AskServerTask(this);
-        askServerTask.execute(s);*/
-        new AskServerTask(this,s).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        EditText ip=(EditText)findViewById(R.id.test_ip);
+        AskServer.setServerIP(ip.getText().toString());
+
+        CheckBox c=(CheckBox)findViewById(R.id.test_checkbox);
+        AskServer.setServeurMarchePas(c.isChecked());
+        new AskServerTask(this,"echo;"+s).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
     public void sendToAuthentification(View view){
+        EditText ip=(EditText)findViewById(R.id.test_ip);
+        AskServer.setServerIP(ip.getText().toString());
+        CheckBox c=(CheckBox)findViewById(R.id.test_checkbox);
+        AskServer.setServeurMarchePas(c.isChecked());
         startActivity(new Intent(this,AuthentificationActivity.class));
     }
+
 }

@@ -26,26 +26,6 @@ public class QcmAfaireActivity extends AbstractActivity {
         layout.setOrientation(LinearLayout.VERTICAL);
         scroll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        //Vector<Button> boutons=new Vector<>();
-        /*Bundle b=this.getIntent().getExtras();
-        final String[] listeNomQcm=b.getStringArray("listeNomQcm");
-        final String[] listeIdQcm=b.getStringArray("listeIdQcm");
-
-
-        for (int i=0;i<listeNomQcm.length;i++) {
-            boutons.add(new Button(this));
-            boutons.get(i).setText(listeNomQcm[i]);
-
-            boutons.get(i).setOnClickListener(new OnClickListenerString(listeIdQcm[i]){
-                public void onClick(View v){
-                    String request="qcmAfaire;"+intitule;
-                    new AskServerTask(QcmAfaireActivity.this,request).execute();
-                }
-            });
-
-            layout.addView(boutons.get(i));
-        }
-*/
         for (Map.Entry<String, String> entry : qcmsAfaire.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();

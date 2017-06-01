@@ -1,7 +1,6 @@
 package progmobile.coursenligne;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import java.util.Vector;
@@ -9,15 +8,15 @@ import java.util.Vector;
 /**
  * Created by Millenium on 30/05/2017.
  */
-public class QcmLayout extends LinearLayout{
-    Vector<QReponseLayout> QReponses=new Vector<>();
+public class LayoutQcm extends LinearLayout{
+    Vector<LayoutQReponse> QReponses=new Vector<>();
 
-    public QcmLayout(Context context) {
+    public LayoutQcm(Context context) {
         super(context);
     }
 
 
-    public void addQReponse(QReponseLayout v){
+    public void addQReponse(LayoutQReponse v){
         super.addView(v);
         QReponses.add(v);
     }
@@ -26,7 +25,7 @@ public class QcmLayout extends LinearLayout{
         return QReponses.size();
     }
 
-    public QReponseLayout get(int i) {
+    public LayoutQReponse get(int i) {
         return QReponses.get(i);
     }
 }

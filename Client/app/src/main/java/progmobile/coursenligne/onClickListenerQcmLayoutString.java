@@ -4,13 +4,13 @@ import android.view.View;
 import android.widget.EditText;
 
 /**
- * Created by Millenium on 30/05/2017.
+ * Sert juste à passer en paramètre des objets
  */
 public class onClickListenerQcmLayoutString implements View.OnClickListener {
-    QcmLayout qcmLayoutO;
+    LayoutQcm layoutQcmO;
     EditText titreQcmO;
-    public onClickListenerQcmLayoutString(QcmLayout q, EditText t) {
-        qcmLayoutO=q;
+    public onClickListenerQcmLayoutString(LayoutQcm q, EditText t) {
+        layoutQcmO =q;
         titreQcmO=t;
     }
 

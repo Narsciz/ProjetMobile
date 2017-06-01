@@ -12,14 +12,17 @@ import java.util.Vector;
 import CommonClasses.QCM;
 import CommonClasses.Utilisateur;
 
+/**
+ * AbstractActivity est mère de toutes les activités du projet et sert à stocker certaines
+ * informations sans avoir à utiliser des Bundle à chaque changement d'activité
+ */
 public class AbstractActivity extends AppCompatActivity {
 
 
-    static Utilisateur session=null;
-    static HashMap<String,String> qcmsAfaire=new HashMap<>();
-    static String currentIntitule="";
-
-    static String currentCreateQcmRequest="";
+    static Utilisateur session=null;//session utilisateur
+    static HashMap<String,String> qcmsAfaire=new HashMap<>();//liste des qcmAfaire qu'un étudiant pourrait avoir à faire
+    static String currentIntitule="";//intitulé courant (créé parce que j'avais des soucis avec la persistence des activités avec les bundle et putExtra)
+    static String currentCreateQcmRequest="";//pareil qu'au dessus
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

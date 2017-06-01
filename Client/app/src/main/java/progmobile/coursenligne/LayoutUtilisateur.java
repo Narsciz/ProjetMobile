@@ -11,9 +11,11 @@ import CommonClasses.Utilisateur;
  * Created by Millenium on 30/05/2017.
  */
 public class LayoutUtilisateur extends LinearLayout{
+
     Utilisateur utilisateur;
     CheckBox checkBox;
     TextView textView;
+
     public LayoutUtilisateur(Context c, Utilisateur u) {
         super(c);
         utilisateur=u;

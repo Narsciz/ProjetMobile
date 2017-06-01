@@ -5,19 +5,16 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-/**
- * Created by Millenium on 30/05/2017.
- */
-public class CheckBoxReponseLayout extends LinearLayout {
+
+public class LayoutCheckBoxReponse extends LinearLayout {
     CheckBox checkBox;
     EditText reponse;
 
-    public CheckBoxReponseLayout(Context context,CheckBox c,EditText e) {
+    public LayoutCheckBoxReponse(Context context, CheckBox c, EditText e) {
         super(context);
         checkBox=c;
         reponse=e;
     }
-
 
     public CheckBox getCheckBox() {
         return checkBox;

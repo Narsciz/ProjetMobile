@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * Created by Millenium on 28/05/2017.
+ * Sert juste à passer en paramètre des objets
  */
 public class OnClickListenerViewString implements View.OnClickListener {
 

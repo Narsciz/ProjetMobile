@@ -8,14 +8,14 @@ import java.util.Vector;
 /**
  * Created by Millenium on 30/05/2017.
  */
-public class ReponsesLayout extends LinearLayout{
-    Vector<CheckBoxReponseLayout> checkBoxReponses=new Vector<>();
+public class LayoutReponses extends LinearLayout{
+    Vector<LayoutCheckBoxReponse> checkBoxReponses=new Vector<>();
 
-    public ReponsesLayout(Context context) {
+    public LayoutReponses(Context context) {
         super(context);
     }
 
-    public void addCheckBoxReponse(CheckBoxReponseLayout c){
+    public void addCheckBoxReponse(LayoutCheckBoxReponse c){
         super.addView(c);
         checkBoxReponses.add(c);
     }
@@ -24,7 +24,7 @@ public class ReponsesLayout extends LinearLayout{
         return checkBoxReponses.size();
     }
 
-    public CheckBoxReponseLayout get(int i) {
+    public LayoutCheckBoxReponse get(int i) {
         return checkBoxReponses.get(i);
     }
 }

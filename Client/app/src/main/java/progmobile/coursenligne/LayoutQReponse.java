@@ -4,22 +4,20 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import java.util.Vector;
-
 /**
  * Created by Millenium on 30/05/2017.
  */
-public class QReponseLayout extends LinearLayout {
+public class LayoutQReponse extends LinearLayout {
     EditText question;
-    ReponsesLayout reponses;
+    LayoutReponses reponses;
 
-    public QReponseLayout(Context context,EditText e,ReponsesLayout r) {
+    public LayoutQReponse(Context context, EditText e, LayoutReponses r) {
         super(context);
         question=e;
         reponses=r;
     }
 
-    public void addReponse(ReponsesLayout r){
+    public void addReponse(LayoutReponses r){
         super.addView(r);
         //reponses.add(r);
     }
@@ -28,7 +26,7 @@ public class QReponseLayout extends LinearLayout {
         return question;
     }
 
-    public ReponsesLayout getReponses() {
+    public LayoutReponses getReponses() {
         return reponses;
     }
 }

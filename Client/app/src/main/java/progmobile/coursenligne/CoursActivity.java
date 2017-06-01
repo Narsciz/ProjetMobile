@@ -30,20 +30,20 @@ public class CoursActivity extends AbstractActivity {
         layout.setOrientation(LinearLayout.VERTICAL);
         scroll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        Vector<Button> boutons=new Vector<>();
+        //On récupère les tableaux contenant les informations de chaque cours
         Bundle b=this.getIntent().getExtras();
         final String[] listeNomCours=b.getStringArray("listeNomCours");
         final String[] listeTypeCours=b.getStringArray("listeTypeCours");
         final String[] listePathCours=b.getStringArray("listePathCours");
 
-
-
+        //on boucle sur les tableaux récupérés et on créé un bouton à chaque itération
         for (int i=0;i<listeNomCours.length;i++) {
-            boutons.add(new Button(this));
-            boutons.get(i).setText(listeNomCours[i]);
+            Button bouton=new Button(this);
+            bouton.setText(listeNomCours[i]);
 
+            //ajout de la fonction au clic du bouton selon le type de cours (pdf ou youtube)
             if (listeTypeCours[i].equals("pdf")){
-                boutons.get(i).setOnClickListener(new OnClickListenerString( listePathCours[i]) {
+                bouton.setOnClickListener(new OnClickListenerString( listePathCours[i]) {
                     public void onClick(View v) {
                         Intent intent;
                         intent = new Intent(CoursActivity.this, PdfActivity.class);
@@ -53,7 +53,7 @@ public class CoursActivity extends AbstractActivity {
                 });
             }
             else if (listeTypeCours[i].equals("video")){
-                boutons.get(i).setOnClickListener(new OnClickListenerString( listePathCours[i]) {
+                bouton.setOnClickListener(new OnClickListenerString( listePathCours[i]) {
                     public void onClick(View v) {
                         Intent intent;
                         intent = new Intent(CoursActivity.this, StreamingActivity.class);
@@ -63,8 +63,7 @@ public class CoursActivity extends AbstractActivity {
                 });
             }
 
-
-            layout.addView(boutons.get(i));
+            layout.addView(bouton);
         }
 
         scroll.addView(layout);
@@ -75,7 +74,7 @@ public class CoursActivity extends AbstractActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
 
-        if (/*prof*/true)
+        if (!session.getEtudiant())
             inflater.inflate(R.menu.cours_prof_menu,menu);
 
         inflater.inflate(R.menu.base_menu,menu);

@@ -9,17 +9,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+/**
+ * ChoixActivity n'est c
+ */
 public class ChoixActivity extends AbstractActivity {
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choix);
-        Bundle b=getIntent().getExtras();
-        //currentIntitule=b.getString("intitule");
     }
 
 
@@ -27,18 +25,16 @@ public class ChoixActivity extends AbstractActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
 
-        if (/*prof*/true) {
+        if (!session.getEtudiant()) {
             inflater.inflate(R.menu.cours_prof_menu, menu);
             inflater.inflate(R.menu.qcm_prof_menu,menu);
         }
-
         inflater.inflate(R.menu.base_menu,menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch(item.getItemId()){
             case R.id.item_home:
                 if (session.getEtudiant())

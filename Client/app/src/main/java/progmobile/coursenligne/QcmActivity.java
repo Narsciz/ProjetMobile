@@ -19,6 +19,7 @@ public class QcmActivity extends AbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ScrollView scroll=new ScrollView(this);
         LinearLayout layout=new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -29,7 +30,6 @@ public class QcmActivity extends AbstractActivity {
         final String[] listeNomQcm=b.getStringArray("listeNomQcm");
         final String[] listeIdQcm=b.getStringArray("listeIdQcm");
 
-
         for (int i=0;i<listeNomQcm.length;i++) {
             boutons.add(new Button(this));
             boutons.get(i).setText(listeNomQcm[i]);
@@ -37,7 +37,6 @@ public class QcmActivity extends AbstractActivity {
 
             boutons.get(i).setOnClickListener(new OnClickListenerString(request){
                 public void onClick(View v){
-                    //String request="qcm;"+intitule;
                     new AskServerTask(QcmActivity.this,intitule).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 }
             });
@@ -48,11 +47,12 @@ public class QcmActivity extends AbstractActivity {
         scroll.addView(layout);
         setContentView(scroll);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
 
-        if (/*prof*/true)
+        if (!session.getEtudiant())
             inflater.inflate(R.menu.qcm_prof_menu,menu);
 
         inflater.inflate(R.menu.base_menu,menu);

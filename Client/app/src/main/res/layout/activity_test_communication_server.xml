@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="progmobile.coursenligne.TestCommunicationServer">
 
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,12 +40,33 @@
         android:layout_alignBottom="@+id/button"
         android:layout_toRightOf="@+id/button"
         android:layout_toEndOf="@+id/button" />
+    <EditText
+        android:id="@+id/test_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/server_ip"
+        android:layout_below="@+id/button3"
+        />
+    <CheckBox
+        android:id="@+id/test_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/test_ip"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/response_server"
-        android:layout_below="@id/button3"
-        android:text="reponse"/>
+        android:text="Le serveur ne marche pas"
+        android:layout_alignBaseline="@+id/test_checkbox"
+        android:layout_alignBottom="@+id/test_checkbox"
+        android:layout_toRightOf="@+id/test_checkbox"
+        android:layout_toEndOf="@+id/test_checkbox"
+        android:id="@+id/textView2" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/test_checkbox"
+        android:text="Si la communication avec le serveur ne fonctionne pas cochez la case ci dessus pour passer dans un mode où la navigation de l'application est possible mais non relié au serveur. Les résultats affichées sont juste les tests qu'on avait conduit avant de lier le client avec le serveur."/>
 
 
 </RelativeLayout>

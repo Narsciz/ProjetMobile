@@ -1,6 +1,5 @@
 package progmobile.coursenligne;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -13,8 +12,6 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.Vector;
-
 import CommonClasses.QCM;
 
 import static android.text.InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE;
@@ -23,19 +20,19 @@ public class CreateQcmActivity extends AbstractActivity {
 
     QCM qcm=new QCM();
     String serial="";
-    QcmLayout qcmLayout;
+    LayoutQcm layoutQcm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        qcmLayout=new QcmLayout(this);
+        layoutQcm =new LayoutQcm(this);
         EditText titreQcm=new EditText(this);
         titreQcm.setHint("Titre QCM");
 
         LinearLayout layout=new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
 
-        qcmLayout.setOrientation(LinearLayout.VERTICAL);
+        layoutQcm.setOrientation(LinearLayout.VERTICAL);
 
         LinearLayout buttonsLayout=new LinearLayout(this);
         buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -50,20 +47,20 @@ public class CreateQcmActivity extends AbstractActivity {
         Button ajouterQuestion=new Button(this);
         ajouterQuestion.setText("+ question");
 
-        ajouterQuestion.setOnClickListener(new OnClickListenerLLayoutSpinner(qcmLayout,spin){
+        ajouterQuestion.setOnClickListener(new OnClickListenerLLayoutSpinner(layoutQcm,spin){
             public void onClick(View v){
 
                 EditText question=new EditText(CreateQcmActivity.this);
                 question.setHint("Question");
                 question.setInputType(TYPE_TEXT_VARIATION_SHORT_MESSAGE);
 
-                ReponsesLayout reponses=new ReponsesLayout(CreateQcmActivity.this);
+                LayoutReponses reponses=new LayoutReponses(CreateQcmActivity.this);
                 reponses.setOrientation(LinearLayout.VERTICAL);
 
-                QReponseLayout questionReponse=new QReponseLayout(CreateQcmActivity.this,question,reponses);
+                LayoutQReponse questionReponse=new LayoutQReponse(CreateQcmActivity.this,question,reponses);
                 questionReponse.setOrientation(LinearLayout.VERTICAL);
 
-                qcmLayoutO.addQReponse(questionReponse);
+                layoutQcmO.addQReponse(questionReponse);
 
 
                 questionReponse.addView(question);
@@ -77,7 +74,7 @@ public class CreateQcmActivity extends AbstractActivity {
                     reponseString.setHint("réponse "+i);
                     reponseString.setInputType(TYPE_TEXT_VARIATION_SHORT_MESSAGE);
 
-                    CheckBoxReponseLayout reponse=new CheckBoxReponseLayout(CreateQcmActivity.this,checkBox,reponseString);
+                    LayoutCheckBoxReponse reponse=new LayoutCheckBoxReponse(CreateQcmActivity.this,checkBox,reponseString);
                     reponse.setOrientation(LinearLayout.HORIZONTAL);
                     reponse.addView(checkBox);
                     reponse.addView(reponseString);
@@ -85,7 +82,7 @@ public class CreateQcmActivity extends AbstractActivity {
 
                 }
 
-                qcmLayoutO.addView(reponses);
+                layoutQcmO.addView(reponses);
 
             }
         });
@@ -93,21 +90,21 @@ public class CreateQcmActivity extends AbstractActivity {
         Button valider=new Button(this);
         valider.setText("Enregistrer");
 
-        valider.setOnClickListener(new onClickListenerQcmLayoutString(qcmLayout,titreQcm){
+        valider.setOnClickListener(new onClickListenerQcmLayoutString(layoutQcm,titreQcm){
             public void onClick(View v){
                 currentCreateQcmRequest = "creationQcm;"+titreQcmO.getText().toString()+";"+ currentIntitule +";";
                 try {
-                    int nbQR = qcmLayout.size();
+                    int nbQR = layoutQcm.size();
                     for (int i = 0; i < nbQR; i++) {
-                        QReponseLayout currentQR = qcmLayout.get(i);
+                        LayoutQReponse currentQR = layoutQcm.get(i);
                         EditText question = currentQR.getQuestion();
                         String questionString = question.getText().toString();
                         currentCreateQcmRequest += questionString + '|';
 
-                        ReponsesLayout currentReponses = currentQR.getReponses();
+                        LayoutReponses currentReponses = currentQR.getReponses();
                         int nbReponse = currentReponses.size();
                         for (int j = 0; j < nbReponse; j++) {
-                            CheckBoxReponseLayout checkBoxReponse =  currentReponses.get(j);
+                            LayoutCheckBoxReponse checkBoxReponse =  currentReponses.get(j);
                             CheckBox checkBox = checkBoxReponse.getCheckBox();
                             String bool;
                             if (checkBox.isChecked())
@@ -142,7 +139,7 @@ public class CreateQcmActivity extends AbstractActivity {
         buttonsLayout.addView(spin);
 
         layout.addView(titreQcm);
-        layout.addView(qcmLayout);
+        layout.addView(layoutQcm);
         layout.addView(buttonsLayout);
         layout.addView(valider);
 

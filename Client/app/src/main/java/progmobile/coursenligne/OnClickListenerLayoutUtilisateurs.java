@@ -3,7 +3,7 @@ package progmobile.coursenligne;
 import android.view.View;
 
 /**
- * Created by Millenium on 30/05/2017.
+ * Sert juste à passer en paramètre des objets
  */
 public class OnClickListenerLayoutUtilisateurs implements View.OnClickListener {
     protected LayoutUtilisateurs layoutO;

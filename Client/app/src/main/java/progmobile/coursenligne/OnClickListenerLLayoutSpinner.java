@@ -4,13 +4,13 @@ import android.view.View;
 import android.widget.Spinner;
 
 /**
- * Created by Millenium on 30/05/2017.
+ * Sert juste à passer en paramètre des objets
  */
 public class OnClickListenerLLayoutSpinner implements View.OnClickListener {
-    QcmLayout qcmLayoutO;
+    LayoutQcm layoutQcmO;
     Spinner spinnerO;
-    public OnClickListenerLLayoutSpinner(QcmLayout qcmLayout, Spinner spin) {
-        qcmLayoutO=qcmLayout;
+    public OnClickListenerLLayoutSpinner(LayoutQcm layoutQcm, Spinner spin) {
+        layoutQcmO = layoutQcm;
         spinnerO=spin;
     }
 

@@ -25,6 +25,11 @@
         android:id="@+id/creationCours_lien"
         />
 
+    <Spinner
+        android:id="@+id/createCours_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </Spinner>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

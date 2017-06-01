@@ -28,12 +28,17 @@
     <string name="qcm_a_faire">QCM</string>
     <string name="nom_cours">Nom cours</string>
     <string name="ajouter_cours_hint">Lien (youtube ou page pdf)</string>
+    <string name="server_ip">Adresse IP serveur</string>
     <string-array name="choix_annee">
         <item>L1</item>
         <item>L2</item>
         <item>L3</item>
         <item>M1</item>
         <item>M2</item>
+    </string-array>
+    <string-array name="choix_lien">
+        <item>video</item>
+        <item>pdf</item>
     </string-array>
     <string-array name="choix_nb_reponse">
         <item>1</item>

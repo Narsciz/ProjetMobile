@@ -1,7 +1,5 @@
 package CommonClasses;
 
 public enum Format {
-    pdf,
-    ppt,
-    video
+	pdf, ppt, video
 }

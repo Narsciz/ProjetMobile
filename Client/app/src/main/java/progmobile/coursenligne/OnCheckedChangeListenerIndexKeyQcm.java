@@ -5,7 +5,7 @@ import android.widget.CompoundButton;
 import CommonClasses.QCM;
 
 /**
- * Created by Millenium on 28/05/2017.
+ * Sert juste à passer en paramètre des objets
  */
 public class OnCheckedChangeListenerIndexKeyQcm implements CompoundButton.OnCheckedChangeListener {
 

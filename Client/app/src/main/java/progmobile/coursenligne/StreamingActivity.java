@@ -14,8 +14,9 @@ import com.google.android.youtube.player.YouTubePlayerView;
 
 public class StreamingActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-    public static final String API_KEY="AIzaSyAuuPqwHjlE4nbOz8EF1Gw95tFYj5HtaXc";
+    public static final String API_KEY="AIzaSyAuuPqwHjlE4nbOz8EF1Gw95tFYj5HtaXc";//obligatoire, clé perso qu'il faut demander à google pour avoir le droit d'utiliser l'api youtube dans un projet
     public static String VIDEO_ID="QjICgmk31js";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,17 @@ public class StreamingActivity extends YouTubeBaseActivity implements YouTubePla
 
         vidView.start();*/
         Bundle b=getIntent().getExtras();
-        VIDEO_ID=b.getString("pathCours");
+        String pathCours=b.getString("pathCours");
+
+        //Pour initialiser une vidéo youtube on a juste besoin de la chaine de caractère à la fin
+        // de la vidéo, par exemple https://www.youtube.com/watch?v=4a0FbQdH3dY -> 4a0FbQdH3dY
+        String[] split=pathCours.split("v=");
+
+        //si le split n'a rien splitté parce que le path donné était déjà de la forme 4a0FbQdH3dY
+        if (split.length<2)
+            VIDEO_ID=split[0];
+        else VIDEO_ID=split[1];
+
         Toast.makeText(this,VIDEO_ID,Toast.LENGTH_SHORT).show();
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.video);
         youTubePlayerView.initialize(API_KEY, this);
