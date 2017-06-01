@@ -243,7 +243,7 @@ public class MultiThreadedSocketServer {
 			myServerSocket = new ServerSocket(1111);
 		} catch (IOException ioe) {
 			System.out
-					.println("Could not create server socket on port 11111. Quitting.");
+					.println("Could not create server socket on port 1111. Quitting.");
 			System.exit(-1);
 		}
 
